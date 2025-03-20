@@ -1,4 +1,4 @@
-@extends('AdminPanel.admin-layout')
+@extends('ArtistPanel.artist-layout')
 
 @section('content')
 <div class="container mt-4">

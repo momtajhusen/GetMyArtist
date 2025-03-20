@@ -88,6 +88,7 @@
   <div class="layout-container">
 
  
+
   <!-- Menu -->
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
@@ -113,6 +114,11 @@
       <div class="menu-inner-shadow"></div>
 
       <ul class="menu-inner py-1">
+
+
+        <li class="menu-header small">
+          <span class="menu-header-text" data-i18n="Main Management">Main Management</span>
+        </li>
         <!-- Dashboards -->
         <li class="menu-item {{ request()->routeIs('admin.dashboard.overview', 'admin.dashboard.statistics', 'admin.dashboard') ? 'active open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -164,6 +170,9 @@
           </ul>
         </li>
 
+        <li class="menu-header small">
+          <span class="menu-header-text" data-i18n="Operations">Operations</span>
+        </li>
         <!-- Bookings -->
         <li class="menu-item {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
           <a href="{{ route('bookings.index') }}" class="menu-link">
@@ -171,31 +180,6 @@
             <div data-i18n="Bookings">Bookings</div>
           </a>
         </li>
-
-        <!-- Contact and Support -->
-        <li class="menu-item {{ request()->routeIs('support_contacts.*') ? 'active' : '' }}">
-          <a href="{{ route('support_contacts.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons ti ti-help-square-rounded"></i>
-            <div data-i18n="Contact and Support">Contact and Support</div>
-          </a>
-        </li>
-
-        <!-- faqs -->
-        <li class="menu-item {{ request()->routeIs('faqs.*') ? 'active' : '' }}">
-          <a href="{{ route('faqs.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons ti ti-message-question"></i>
-            <div data-i18n="faqs">faqs</div>
-          </a>
-        </li>
-
-        <!-- social -->
-        {{-- <li class="menu-item {{ request()->routeIs('socials.*') ? 'active' : '' }}">
-          <a href="{{ route('Socials.socials') }}" class="menu-link">
-            <i class="menu-icon tf-icons ti ti-message-question"></i>
-            <div data-i18n="socials">socials</div>
-          </a>
-        </li> --}}
-
 
         <!-- Category & Event Menu -->
         <li class="menu-item {{ (request()->is('categories') || request()->is('events') || request()->routeIs('categories.*')) ? 'active open' : '' }}">
@@ -216,6 +200,24 @@
             </li>
           </ul>
         </li>
+
+        <li class="menu-header small">
+          <span class="menu-header-text" data-i18n="Support & Information">Support & Information</span>
+        </li>
+        <!-- faqs -->
+        <li class="menu-item {{ request()->routeIs('faqs.*') ? 'active' : '' }}">
+          <a href="{{ route('faqs.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-message-question"></i>
+            <div data-i18n="FAQs">FAQs</div>
+          </a>
+        </li>
+        <!-- social -->
+        {{-- <li class="menu-item {{ request()->routeIs('socials.*') ? 'active' : '' }}">
+          <a href="{{ route('Socials.socials') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-message-question"></i>
+            <div data-i18n="socials">socials</div>
+          </a>
+        </li> --}}
 
         <!-- Legal Policies Menu -->
         <li class="menu-item {{ request()->routeIs('policies.edit') ? 'active open' : '' }}">
@@ -240,6 +242,13 @@
               </a>
             </li>
           </ul>
+        </li>
+        <!-- Contact and Support -->
+        <li class="menu-item {{ request()->routeIs('support_contacts.*') ? 'active' : '' }}">
+          <a href="{{ route('support_contacts.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-help-square-rounded"></i>
+            <div data-i18n="Contact and Support">Contact and Support</div>
+          </a>
         </li>
 
       </ul>

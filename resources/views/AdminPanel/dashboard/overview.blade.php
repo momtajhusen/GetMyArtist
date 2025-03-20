@@ -11,8 +11,6 @@
 
 @endsection
 
-
-
 @section('scripts')
 <script src="{{ asset('assets/js/dashboards-crm.js') }}"></script>
 
@@ -233,6 +231,8 @@
               </a>
             </li>
           </ul>
+
+          
           <div class="tab-content p-0 ms-0 ms-sm-2">
             <div class="tab-pane fade show active" id="navs-orders-id" role="tabpanel">
               <div id="earningReportsTabsOrders"></div>

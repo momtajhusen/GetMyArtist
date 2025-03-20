@@ -286,7 +286,7 @@
                   id="phone"
                   class="form-control"
                   placeholder="Enter Phone Number"
-                  value="{{ old('phone') }}"
+                  value="{{ old('phone', $artist->phone ?? '') }}"
                   required
                 >
                 <div class="invalid-feedback"> Please enter your phone number. </div>
@@ -300,7 +300,7 @@
                   id="bs-validation-email"
                   class="form-control"
                   placeholder="yourname@example.com"
-                  value="{{ old('email') }}"
+                  value="{{ old('email', $artist->email ?? '') }}"
                   required
                 >
                 <div class="invalid-feedback"> Please enter a valid email </div>

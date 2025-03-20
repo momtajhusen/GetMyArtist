@@ -9,16 +9,13 @@ return new class extends Migration {
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('artist_id')->constrained('artists')->onDelete('cascade');  
-            $table->string('title')->nullable();  
-            $table->text('description')->nullable(); 
-            $table->enum('media_type', ['image', 'video', 'youtube', 'cloud']);  
-            $table->string('storage_path')->nullable();  
-            $table->string('media_url')->nullable();  
-            $table->string('store')->nullable();  
-            $table->integer('duration')->nullable(); 
-            $table->bigInteger('size')->nullable();  
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft'); 
+            $table->foreignId('artist_id')->constrained('artists')->onDelete('cascade');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            // media_type will be 'image' or 'video'
+            $table->enum('media_type', ['image', 'video'])->nullable();
+            // storage_path holds either file storage path or URL
+            $table->string('storage_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

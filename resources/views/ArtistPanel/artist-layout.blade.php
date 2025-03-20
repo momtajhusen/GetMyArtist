@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Dashboard - Logistics</title>
-
     
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -41,19 +40,19 @@
 
     <!-- Core CSS -->
     
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default') }}" class="template-customizer-theme-css" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/core') }}" class="template-customizer-core-css" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default') }}" class="template-customizer-theme-css" /> --}}
     
-    <link rel="stylesheet" href="{{ asset('assets/css/demo') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/demo') }}" /> --}}
     
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves') }}" /> --}}
     
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead') }}" /> 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar') }}" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead') }}" />  --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts') }}" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5') }}" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5') }}" /> --}}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
@@ -86,82 +85,139 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar  ">
-  <div class="layout-container">
+    <div class="layout-wrapper layout-content-navbar  ">
+      <div class="layout-container">
 
-
-  <!-- Menu -->
-  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-    <div class="app-brand demo">
-      <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
-        <span class="app-brand-logo demo">
-          <!-- SVG Logo Code -->
-        </span>
-        <span class="app-brand-text demo menu-text fw-bold">Vuexy</span>
-      </a>
-      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-        <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
-        <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
-      </a>
-    </div>
-
-    <div class="menu-inner-shadow"></div>
-
-    <ul class="menu-inner py-1">
-
-      <!-- Dashboard -->
-      <li class="menu-item {{ request()->routeIs('artist.dashboard') ? 'active' : '' }}">
-        <a href="{{ route('artist.dashboard') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-dashboard"></i>
-          <div data-i18n="Dashboard">Dashboard</div>
+    <!-- Sidebar Menu -->
+    <aside id="layout-menu" class="layout-menu menu-vertical bg-menu-theme">
+      <div class="app-brand">
+        <a href="{{ route('artist.dashboard') }}" class="app-brand-link">
+          <strong>GetMyArtist</strong>
         </a>
-      </li>
-
-      <!-- Profile Section -->
-      <li class="menu-item {{ request()->routeIs('artist.completeProfile') ? 'active open' : '' }}">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons ti ti-user"></i>
-          <div data-i18n="Profile">Profile</div>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+          <i class="ti ti-menu-toggle-icon d-none d-xl-block align-middle"></i>
+          <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
         </a>
-        <ul class="menu-sub">
-          <li class="menu-item {{ request()->routeIs('artist.completeProfile') ? 'active' : '' }}">
-            <a href="{{ route('artist.completeProfile') }}" class="menu-link">
-              <i class="menu-icon tf-icons ti ti-edit"></i>
-              <div data-i18n="Update Profile">Update Profile</div>
-            </a>
-          </li>      
-        </ul>
-      </li>
-    
-    <!-- Bookings -->
-    <li class="menu-item {{ request()->routeIs('artist.bookings.*') ? 'active' : '' }}">
-      <a href="{{ route('artist.bookings.index') }}" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-calendar"></i>
-        <div data-i18n="Bookings">Bookings</div>
-      </a>
-    </li>
+      </div>
+      <div class="menu-inner-shadow"></div>
+      <ul class="menu-inner py-1">
 
+        <!-- Dashboard -->
+        <li class="menu-item {{ request()->routeIs('artist.dashboard') ? 'active' : '' }}">
+          <a href="{{ route('artist.dashboard') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <!-- Profile Section -->
+        <li class="menu-item {{ request()->routeIs('artist.completeProfile') ? 'active open' : '' }}">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-user"></i>
+            <span>Profile</span>
+          </a>
+          <ul class="menu-sub">
+            <li class="menu-item {{ request()->routeIs('artist.completeProfile') ? 'active' : '' }}">
+              <a href="{{ route('artist.completeProfile') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-edit"></i>
+                <span>Update Profile</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+                <!-- Header for Media Management -->
+                <li class="menu-header small">
+                  <span class="menu-header-text" data-i18n="Media">Media</span>
+                </li>
+                <!-- Albums Menu -->
+                <li class="menu-item {{ request()->routeIs('artist.albums.*') ? 'active open' : '' }}">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-album"></i>
+                    <span>Events Album</span>
+                  </a>
+                  <ul class="menu-sub">
+                    <!-- All Albums Submenu -->
+                    <li class="menu-item {{ request()->routeIs('artist.albums.index') ? 'active' : '' }}">
+                      <a href="{{ route('artist.albums.index') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-list"></i>
+                        <span>All Album</span>
+                      </a>
+                    </li>
+                    <!-- Upload Album Submenu -->
+                    <li class="menu-item {{ request()->routeIs('artist.albums.upload') ? 'active' : '' }}">
+                      <a href="{{ route('artist.albums.upload') }}" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-upload"></i>
+                        <span>Upload Album</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
         
-      <!-- Payments -->
-      <li class="menu-item {{ request()->routeIs('artist.payments') ? 'active' : '' }}">
-        <a href="{{ route('artist.payments') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-credit-card"></i>
-          <div data-i18n="Payments">Payments</div>
-        </a>
-      </li>
-    </ul>
-    
-  </aside>
-<!-- / Menu -->
 
+        <!-- Header for Artist Activities -->
+        <li class="menu-header small">
+          <span class="menu-header-text" data-i18n="Artist Activities">Artist Activities</span>
+        </li>
 
-    
+        <!-- Bookings -->
+        <li class="menu-item {{ request()->routeIs('artist.bookings.*') ? 'active' : '' }}">
+          <a href="{{ route('artist.bookings.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-calendar"></i>
+            <span>Bookings</span>
+          </a>
+        </li>
+
+        <!-- Payments -->
+        <li class="menu-item {{ request()->routeIs('artist.payments') ? 'active' : '' }}">
+          <a href="{{ route('artist.payments') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-credit-card"></i>
+            <span>Payments</span>
+          </a>
+        </li>
+
+        <!-- Portfolio -->
+        {{-- <li class="menu-item {{ request()->routeIs('artist.portfolio') ? 'active' : '' }}">
+          <a href="{{ route('artist.portfolio') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-image"></i>
+            <span>Portfolio</span>
+          </a>
+        </li> --}}
+
+        <!-- Header for Management Section -->
+        <li class="menu-header small">
+          <span class="menu-header-text" data-i18n="Management">Management</span>
+        </li>
+
+        <!-- Reviews -->
+        <li class="menu-item {{ request()->routeIs('artist.reviews') ? 'active' : '' }}">
+          <a href="{{ route('artist.reviews') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-star"></i>
+            <span>Reviews</span>
+          </a>
+        </li>
+
+        <!-- Settings -->
+        <li class="menu-item {{ request()->routeIs('artist.settings') ? 'active' : '' }}">
+          <a href="{{ route('artist.settings') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-settings"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+
+        <!-- Reports -->
+        <li class="menu-item {{ request()->routeIs('artist.reports') ? 'active' : '' }}">
+          <a href="{{ route('artist.reports') }}" class="menu-link">
+            <i class="menu-icon tf-icons ti ti-chart-bar"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+
+      </ul>
+    </aside>
 
     <!-- Layout container -->
     <div class="layout-page">
-      
-    
       <!-- Navbar -->
       <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
         
@@ -640,8 +696,6 @@
       <!-- / Layout page -->
     </div>
 
-    
-    
     <!-- Overlay -->
     <div class="layout-overlay layout-menu-toggle"></div>
     

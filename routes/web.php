@@ -52,14 +52,12 @@ Route::get('/albums', [AlbumController::class, 'index'])->name('albums.index');
 Route::get('/albums/create', [AlbumController::class, 'create'])->name('albums.create');
 Route::post('/albums/store', [AlbumController::class, 'store'])->name('albums.store');
 
-
 // ---------- Public Booking Routes ----------
 // Public booking page 
 Route::get('/passbook', [BookingController::class, 'createPublicBooking'])->name('bookings.createPublicBooking');
 Route::post('/booking', [BookingController::class, 'storePublicBooking'])->name('bookings.storePublic');
 Route::post('/booking/otp/{booking}', [BookingController::class, 'verifyOtp'])->name('bookings.otpVerify');
 Route::get('/booking/success', [BookingController::class, 'successPage'])->name('booking.success');
-
 
 // ---------- Admin Panel Routes ----------
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -103,7 +101,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('socials', SocialController::class);
 });
 
-
 // ---------- User Panel Routes ----------
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/dashboard', function () {
@@ -112,15 +109,45 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('payments', [PaymentController::class, 'userPayments'])->name('user.payments');
 });
 
-
 // ---------- Artist Panel Routes ----------
 Route::middleware(['auth', 'artist'])->group(function () {
+    // Dashboard
     Route::get('/artist-dashboard', function () {
-        return view('ArtistPanel.artist-layout');
+        return view('ArtistPanel.Dashboard.index');
     })->name('artist.dashboard');
-    // Artist booking list  
-    Route::get('/artist/bookings', [BookingController::class, 'artistIndex'])->name('artist.bookings.index');
-    Route::get('payments', [PaymentController::class, 'artistPayments'])->name('artist.payments');
+
+    // Profile
     Route::get('/complete-profile', [ArtistController::class, 'completeProfile'])->name('artist.completeProfile');
     Route::post('/complete-profile', [ArtistController::class, 'storeProfile'])->name('artist.storeProfile');
+
+    // Bookings
+    Route::get('/artist/bookings', [BookingController::class, 'artistIndex'])->name('artist.bookings.index');
+
+    // Payments
+    Route::get('/payments', [PaymentController::class, 'artistPayments'])->name('artist.payments');
+
+    // Portfolio
+    Route::get('/artist/portfolio', [ArtistController::class, 'portfolio'])->name('artist.portfolio');
+
+    // Reviews
+    Route::get('/artist/reviews', [ArtistController::class, 'reviews'])->name('artist.reviews');
+
+    // Settings
+    Route::get('/artist/settings', [ArtistController::class, 'settings'])->name('artist.settings');
+    Route::post('/artist/settings', [ArtistController::class, 'updateSettings'])->name('artist.updateSettings');
+
+    // Reports
+    Route::get('/artist/reports', [ArtistController::class, 'reports'])->name('artist.reports');
+
+    // Events (New)
+    Route::get('/artist/events', [ArtistController::class, 'events'])->name('artist.events');
+
+    // All Albums
+    Route::get('/artist/albums', [ArtistController::class, 'albumsIndex'])->name('artist.albums.index');
+    
+    // Upload Album
+    Route::get('/artist/albums/upload', [ArtistController::class, 'uploadAlbumForm'])->name('artist.albums.upload');
+    Route::post('/artist/albums/upload', [ArtistController::class, 'storeAlbum'])->name('artist.albums.store');
+ 
 });
+
