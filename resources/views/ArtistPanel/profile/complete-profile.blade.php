@@ -55,7 +55,7 @@
           </span>
         </button>
       </div>
-      <div class="line"><i class="ti ti-chevron-right"></i></div>
+      <div class="line"><i class="ti tabler-chevron-right"></i></div>
       <!-- Step 2: Account Details -->
       <div class="step" data-target="#step-2">
         <button type="button" class="step-trigger">
@@ -66,7 +66,7 @@
           </span>
         </button>
       </div>
-      <div class="line"><i class="ti ti-chevron-right"></i></div>
+      <div class="line"><i class="ti tabler-chevron-right"></i></div>
       <!-- Step 3: Category -->
       <div class="step" data-target="#step-3">
         <button type="button" class="step-trigger">
@@ -77,7 +77,7 @@
           </span>
         </button>
       </div>
-      <div class="line"><i class="ti ti-chevron-right"></i></div>
+      <div class="line"><i class="ti tabler-chevron-right"></i></div>
       <!-- Step 4: Genre -->
       {{-- <div class="step" data-target="#step-4">
         <button type="button" class="step-trigger">
@@ -88,7 +88,7 @@
           </span>
         </button>
       </div>
-      <div class="line"><i class="ti ti-chevron-right"></i></div> --}}
+      <div class="line"><i class="ti tabler-chevron-right"></i></div> --}}
       <!-- Step 5: Events -->
       <div class="step" data-target="#step-5">
         <button type="button" class="step-trigger">
@@ -100,7 +100,7 @@
         </button>
       </div>
       <!-- Step 6: OTP (optional) -->
-      {{-- <div class="line"><i class="ti ti-chevron-right"></i></div>
+      {{-- <div class="line"><i class="ti tabler-chevron-right"></i></div>
       <div class="step" data-target="#step-6">
         <button type="button" class="step-trigger">
           <span class="bs-stepper-circle">6</span>
@@ -212,7 +212,7 @@
 
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-primary btn-next">
-              Next <i class="ti ti-arrow-right"></i>
+              Next <i class="ti tabler-arrow-right"></i>
             </button>
           </div>
         </div>
@@ -309,10 +309,10 @@
 
           <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-label-secondary btn-prev">
-              <i class="ti ti-arrow-left"></i> Previous
+              <i class="ti tabler-arrow-left"></i> Previous
             </button>
             <button type="button" class="btn btn-primary btn-next">
-              Next <i class="ti ti-arrow-right"></i>
+              Next <i class="ti tabler-arrow-right"></i>
             </button>
           </div>
         </div>
@@ -389,10 +389,10 @@
 
           <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-label-secondary btn-prev">
-              <i class="ti ti-arrow-left"></i> Previous
+              <i class="ti tabler-arrow-left"></i> Previous
             </button>
             <button type="button" class="btn btn-primary btn-next">
-              Next <i class="ti ti-arrow-right"></i>
+              Next <i class="ti tabler-arrow-right"></i>
             </button>
           </div>
         </div>
@@ -408,10 +408,10 @@
           
           <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-label-secondary btn-prev">
-              <i class="ti ti-arrow-left"></i> Previous
+              <i class="ti tabler-arrow-left"></i> Previous
             </button>
             <button type="button" class="btn btn-primary btn-next">
-              Next <i class="ti ti-arrow-right"></i>
+              Next <i class="ti tabler-arrow-right"></i>
             </button>
           </div>
         </div>
@@ -456,10 +456,10 @@
 
           <div class="d-flex justify-content-between mt-4">
             <button type="button" class="btn btn-label-secondary btn-prev">
-              <i class="ti ti-arrow-left"></i> Previous
+              <i class="ti tabler-arrow-left"></i> Previous
             </button>
             <button type="submit" class="btn btn-success">
-              Submit Profile <i class="ti ti-check"></i>
+              Submit Profile <i class="ti tabler-check"></i>
             </button>
           </div>
         </div>
@@ -525,4 +525,4 @@
   <script src="{{ asset('assets/js/form-validation.js') }}"></script>
   
   
-@endsection
+@endsection  

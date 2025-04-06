@@ -99,6 +99,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('support_contacts', SupportContactController::class);
     Route::resource('faqs', FaqController::class);
     Route::resource('socials', SocialController::class);
+
+    // Artist Profile 
+    Route::get('/artist/profile/{id}', [ArtistController::class, 'show'])->name('artist.profile');
 });
 
 // ---------- User Panel Routes ----------

@@ -83,18 +83,18 @@
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="ti ti-dots-vertical"></i>
+                                    <i class="ti tabler-dots-vertical"></i>
                                 </button>
                                 <div class="dropdown-menu">
                                     <!-- Trigger Edit Modal -->
                                     <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $social->id }}">
-                                        <i class="ti ti-pencil me-1"></i> Edit
+                                        <i class="ti tabler-pencil me-1"></i> Edit
                                     </button>
                                     <form action="{{ route('socials.destroy', $social->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="dropdown-item text-danger">
-                                            <i class="ti ti-trash me-1"></i> Delete
+                                            <i class="ti tabler-trash me-1"></i> Delete
                                         </button>
                                     </form>
                                 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Artist;
 use App\Models\Categories;
 use App\Models\Album;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ArtistController extends Controller
@@ -50,10 +51,20 @@ class ArtistController extends Controller
     }
     
 
-    public function show(Artist $artist)
+    public function show(Request $request, $id)
     {
-        return view('AdminPanel.artists.show', compact('artist'));
+        $artist = Artist::find($id);
+    
+        if (!$artist) {
+            return redirect()->back()->with('error', 'Artist not found.');
+        }
+    
+        $user = User::find($artist->user_id);
+    
+        return view('AdminPanel.Profile.index', compact('artist', 'user'));
     }
+    
+    
 
     public function edit(Artist $artist)
     {
@@ -171,105 +182,104 @@ class ArtistController extends Controller
         return redirect()->route('artist.dashboard')->with('success', 'Your profile has been updated successfully.');
     }
 
- // Display all albums for the authenticated artist
- public function albumsIndex()
- {
-     $artist = auth()->user();
-     $albums = Album::where('artist_id', $artist->id)->get();
-     return view('ArtistPanel.Albums.index', compact('albums'));
- }
+    // Display all albums for the authenticated artist
+    public function albumsIndex()
+    {
+        $artist = auth()->user();
+        $albums = Album::where('artist_id', $artist->id)->get();
+        return view('ArtistPanel.Albums.index', compact('albums'));
+    }
 
- // Show the album upload form
- public function uploadAlbumForm()
- {
-     return view('ArtistPanel.Albums.upload');
- }
+    // Show the album upload form
+    public function uploadAlbumForm()
+    {
+        return view('ArtistPanel.Albums.upload');
+    }
 
- // Store album based on upload type (local or url)
- public function storeAlbum(Request $request)
- {
-     // Validate common fields
-     $rules = [
-         'title'       => 'required|string|max:255',
-         'description' => 'nullable|string',
-         'upload_type' => 'required|in:local,url',
-     ];
- 
-     if ($request->upload_type === 'local') {
-         $rules['media_file'] = 'required|file';
-     } elseif ($request->upload_type === 'url') {
-         $rules['media_url'] = 'required|url';
-     }
-     $validatedData = $request->validate($rules);
- 
-     $album = new Album();
-     $album->artist_id   = auth()->id();
-     $album->title       = $validatedData['title'];
-     $album->description = $validatedData['description'] ?? null;
- 
-     if ($request->upload_type === 'local') {
-         $file = $request->file('media_file');
-         $extension = strtolower($file->getClientOriginalExtension());
- 
-         $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-         $videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
- 
-         if (in_array($extension, $imageExtensions)) {
-             $album->media_type = 'image';
-         } elseif (in_array($extension, $videoExtensions)) {
-             $album->media_type = 'video';
-         } else {
-             $album->media_type = 'image';
-         }
-         $path = $file->store('albums', 'public');
-         $album->storage_path = $path;
-     } elseif ($request->upload_type === 'url') {
-         $mediaUrl = $validatedData['media_url'];
-         $album->storage_path = $mediaUrl;
- 
-         $parsedPath = parse_url($mediaUrl, PHP_URL_PATH);
-         $extension = strtolower(pathinfo($parsedPath, PATHINFO_EXTENSION));
- 
-         $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-         $videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
- 
-         // Define video hosting keywords
-         $videoKeywords = ['youtube', 'youtu.be', 'vimeo', 'dailymotion'];
-         $containsVideoKeyword = false;
-         foreach ($videoKeywords as $keyword) {
-             if (stripos($mediaUrl, $keyword) !== false) {
-                 $containsVideoKeyword = true;
-                 break;
-             }
-         }
- 
-         // If URL doesn't contain known video keywords, then it must have an extension.
-         if (!$containsVideoKeyword && !$extension) {
-             return redirect()->back()
-                 ->withErrors(['media_url' => 'The URL must contain a valid file extension if it is not from a known video hosting site.'])
-                 ->withInput();
-         }
- 
-         // Set media_type based on extension if available, otherwise use video if keyword exists.
-         if ($extension) {
-             if (in_array($extension, $imageExtensions)) {
-                 $album->media_type = 'image';
-             } elseif (in_array($extension, $videoExtensions)) {
-                 $album->media_type = 'video';
-             } else {
-                 $album->media_type = 'image'; // default fallback
-             }
-         } else {
-             $album->media_type = $containsVideoKeyword ? 'video' : 'image';
-         }
-     }
- 
-     $album->save();
- 
-     return redirect()->route('artist.albums.index')->with('success', 'Album uploaded successfully.');
- }
- 
- 
+    // Store album based on upload type (local or url)
+    public function storeAlbum(Request $request)
+    {
+        // Validate common fields
+        $rules = [
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'upload_type' => 'required|in:local,url',
+        ];
+    
+        if ($request->upload_type === 'local') {
+            $rules['media_file'] = 'required|file';
+        } elseif ($request->upload_type === 'url') {
+            $rules['media_url'] = 'required|url';
+        }
+        $validatedData = $request->validate($rules);
+    
+        $album = new Album();
+        $album->artist_id   = auth()->id();
+        $album->title       = $validatedData['title'];
+        $album->description = $validatedData['description'] ?? null;
+    
+        if ($request->upload_type === 'local') {
+            $file = $request->file('media_file');
+            $extension = strtolower($file->getClientOriginalExtension());
+    
+            $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
+    
+            if (in_array($extension, $imageExtensions)) {
+                $album->media_type = 'image';
+            } elseif (in_array($extension, $videoExtensions)) {
+                $album->media_type = 'video';
+            } else {
+                $album->media_type = 'image';
+            }
+            $path = $file->store('albums', 'public');
+            $album->storage_path = $path;
+        } elseif ($request->upload_type === 'url') {
+            $mediaUrl = $validatedData['media_url'];
+            $album->storage_path = $mediaUrl;
+    
+            $parsedPath = parse_url($mediaUrl, PHP_URL_PATH);
+            $extension = strtolower(pathinfo($parsedPath, PATHINFO_EXTENSION));
+    
+            $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            $videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
+    
+            // Define video hosting keywords
+            $videoKeywords = ['youtube', 'youtu.be', 'vimeo', 'dailymotion'];
+            $containsVideoKeyword = false;
+            foreach ($videoKeywords as $keyword) {
+                if (stripos($mediaUrl, $keyword) !== false) {
+                    $containsVideoKeyword = true;
+                    break;
+                }
+            }
+    
+            // If URL doesn't contain known video keywords, then it must have an extension.
+            if (!$containsVideoKeyword && !$extension) {
+                return redirect()->back()
+                    ->withErrors(['media_url' => 'The URL must contain a valid file extension if it is not from a known video hosting site.'])
+                    ->withInput();
+            }
+    
+            // Set media_type based on extension if available, otherwise use video if keyword exists.
+            if ($extension) {
+                if (in_array($extension, $imageExtensions)) {
+                    $album->media_type = 'image';
+                } elseif (in_array($extension, $videoExtensions)) {
+                    $album->media_type = 'video';
+                } else {
+                    $album->media_type = 'image'; // default fallback
+                }
+            } else {
+                $album->media_type = $containsVideoKeyword ? 'video' : 'image';
+            }
+        }
+    
+        $album->save();
+    
+        return redirect()->route('artist.albums.index')->with('success', 'Album uploaded successfully.');
+    }
+    
 }
 
 

@@ -31,7 +31,7 @@
           <div class="col-md-3 col-6">
             <div class="d-flex align-items-center">
               <div class="badge rounded bg-label-primary me-4 p-2">
-                <i class="ti ti-calendar-event ti-lg"></i>
+                <i class="ti tabler-calendar-event ti-lg"></i>
               </div>
               <div class="card-info">
                 <h5 class="mb-0">150</h5>
@@ -43,7 +43,7 @@
           <div class="col-md-3 col-6">
             <div class="d-flex align-items-center">
               <div class="badge rounded bg-label-info me-4 p-2">
-                <i class="ti ti-alert-circle ti-lg"></i>
+                <i class="ti tabler-alert-circle ti-lg"></i>
               </div>
               <div class="card-info">
                 <h5 class="mb-0">25</h5>
@@ -55,10 +55,10 @@
           <div class="col-md-3 col-6">
             <div class="d-flex align-items-center">
               <div class="badge rounded bg-label-success me-4 p-2">
-                <i class="ti ti-currency-dollar ti-lg"></i>
+                <i class="ti tabler-currency-rupee ti-lg"></i>
               </div>
               <div class="card-info">
-                <h5 class="mb-0">$2,000</h5>
+                <h5 class="mb-0">₹2,000</h5>
                 <small>Earnings</small>
               </div>
             </div>
@@ -67,7 +67,7 @@
           <div class="col-md-3 col-6">
             <div class="d-flex align-items-center">
               <div class="badge rounded bg-label-warning me-4 p-2">
-                <i class="ti ti-briefcase ti-lg"></i>
+                <i class="ti tabler-briefcase ti-lg"></i>
               </div>
               <div class="card-info">
                 <h5 class="mb-0">3</h5>

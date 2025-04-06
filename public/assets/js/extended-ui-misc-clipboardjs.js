@@ -1,1 +1,29 @@
-"use strict";!function(){var t=[].slice.call(document.querySelectorAll(".clipboard-btn"));ClipboardJS?t.map(function(t){new ClipboardJS(t).on("success",function(t){"copy"==t.action&&toastr.success("","Copied to Clipboard!!")})}):t.map(function(t){t.setAttribute("disabled",!0)})}();
+/**
+ * Clipboard
+ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  const clipboardList = [].slice.call(document.querySelectorAll('.clipboard-btn'));
+
+  const notyf = new Notyf({
+    duration: 3000,
+    dismissible: true,
+    position: { x: 'right', y: 'top' }
+  });
+  if (ClipboardJS) {
+    clipboardList.map(function (clipboardEl) {
+      const clipboard = new ClipboardJS(clipboardEl);
+      clipboard.on('success', function (e) {
+        if (e.action === 'copy') {
+          notyf.success('Copied to Clipboard!!');
+        }
+      });
+    });
+  } else {
+    clipboardList.map(function (clipboardEl) {
+      clipboardEl.setAttribute('disabled', true);
+    });
+  }
+});

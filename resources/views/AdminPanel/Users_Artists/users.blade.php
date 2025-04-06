@@ -49,18 +49,18 @@
             <td>
               <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                  <i class="ti ti-dots-vertical"></i>
+                  <i class="ti tabler-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu">
                   <!-- Trigger Edit Modal -->
                   <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $user->id }}">
-                    <i class="menu-icon tf-icons ti ti-users"></i> Profile
+                    <i class="menu-icon tf-icons ti tabler-users"></i> Profile
                   </button>
                   {{-- <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Are you sure you want to delete this user?');">
-                      <i class="ti ti-trash me-1"></i> Delete
+                      <i class="ti tabler-trash me-1"></i> Delete
                     </button>
                   </form> --}}
                 </div>

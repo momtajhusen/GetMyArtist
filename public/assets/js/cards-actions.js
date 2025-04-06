@@ -1,1 +1,142 @@
-"use strict";!function(){var e=[].slice.call(document.querySelectorAll(".card-collapsible")),l=[].slice.call(document.querySelectorAll(".card-expand")),s=[].slice.call(document.querySelectorAll(".card-close")),a=document.getElementById("sortable-4");e&&e.map(function(l){l.addEventListener("click",e=>{e.preventDefault(),new bootstrap.Collapse(l.closest(".card").querySelector(".collapse")),l.closest(".card-header").classList.toggle("collapsed"),Helpers._toggleClass(l.firstElementChild,"ti-chevron-down","ti-chevron-right")})}),l&&l.map(function(l){l.addEventListener("click",e=>{e.preventDefault(),Helpers._toggleClass(l.firstElementChild,"ti-arrows-maximize","ti-arrows-minimize"),l.closest(".card").classList.toggle("card-fullscreen")})}),document.addEventListener("keyup",e=>{e.preventDefault(),"Escape"===e.key&&(e=document.querySelector(".card-fullscreen"))&&(Helpers._toggleClass(e.querySelector(".card-expand").firstChild,"ti-arrows-maximize","ti-arrows-minimize"),e.classList.toggle("card-fullscreen"))}),s&&s.map(function(l){l.addEventListener("click",e=>{e.preventDefault(),l.closest(".card").classList.add("d-none")})}),null!==a&&Sortable.create(a,{animation:500,handle:".card"})}(),$(function(){var e=$(".card-reload");e.length&&e.on("click",function(e){e.preventDefault();var l=$(this);l.closest(".card").block({message:'<div class="sk-fold sk-primary"><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div></div><h5>LOADING...</h5>',css:{backgroundColor:"transparent",border:"0"},overlayCSS:{backgroundColor:$("html").hasClass("dark-style")?"#000":"#fff",opacity:.55}}),setTimeout(function(){l.closest(".card").unblock(),l.closest(".card").find(".card-alert").length&&l.closest(".card").find(".card-alert").html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button><span class="fw-medium">Holy grail!</span> Your success/error message here.</div>')},2500)})});
+/**
+ * Cards Actions
+ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function () {
+  const collapseElementList = Array.from(document.querySelectorAll('.card-collapsible'));
+  const expandElementList = Array.from(document.querySelectorAll('.card-expand'));
+  const closeElementList = Array.from(document.querySelectorAll('.card-close'));
+  const cardDnD = document.getElementById('sortable-4');
+
+  // Collapsible card
+  // --------------------------------------------------------------------
+  collapseElementList.forEach(function (collapseElement) {
+    collapseElement.addEventListener('click', function (event) {
+      event.preventDefault();
+      // Collapse the element
+      new bootstrap.Collapse(collapseElement.closest('.card').querySelector('.collapse'));
+      // Toggle collapsed class in `.card-header` element
+      collapseElement.closest('.card-header').classList.toggle('collapsed');
+      // Toggle class tabler-chevron-down & tabler-chevron-up
+      Helpers._toggleClass(collapseElement.firstElementChild, 'tabler-chevron-down', 'tabler-chevron-up');
+    });
+  });
+
+  // Card Toggle fullscreen
+  // --------------------------------------------------------------------
+  expandElementList.forEach(function (expandElement) {
+    expandElement.addEventListener('click', function (event) {
+      event.preventDefault();
+      // Toggle class tabler-arrows-maximize & tabler-arrows-minimize
+      Helpers._toggleClass(expandElement.firstElementChild, 'tabler-arrows-maximize', 'tabler-arrows-minimize');
+      expandElement.closest('.card').classList.toggle('card-fullscreen');
+    });
+  });
+
+  // Toggle fullscreen on ESC key
+  document.addEventListener('keyup', function (event) {
+    event.preventDefault();
+    //Esc button
+    if (event.key === 'Escape') {
+      const cardFullscreen = document.querySelector('.card-fullscreen');
+      // Toggle class tabler-arrows-maximize & tabler-arrows-minimize
+
+      if (cardFullscreen) {
+        Helpers._toggleClass(
+          cardFullscreen.querySelector('.card-expand').firstElementChild,
+          'tabler-arrows-maximize',
+          'tabler-arrows-minimize'
+        );
+        cardFullscreen.classList.toggle('card-fullscreen');
+      }
+    }
+  });
+
+  // Card close
+  // --------------------------------------------------------------------
+  closeElementList.forEach(function (closeElement) {
+    closeElement.addEventListener('click', function (event) {
+      event.preventDefault();
+      closeElement.closest('.card').classList.add('d-none');
+    });
+  });
+
+  // Sortable.js (Drag & Drop cards)
+  // --------------------------------------------------------------------
+  if (cardDnD) {
+    Sortable.create(cardDnD, {
+      animation: 500,
+      handle: '.card'
+    });
+  }
+
+  // Card reload (js)
+  // --------------------------------------------------------------------
+  const cardReload = document.querySelectorAll('.card-reload');
+
+  if (cardReload) {
+    // Add unique data attributes to each card
+    const cards = document.querySelectorAll('.card-action');
+    cards.forEach((card, index) => {
+      card.dataset.cardId = `card-${index + 1}`;
+    });
+
+    cardReload.forEach(button => {
+      button.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Find the closest card with the "card-action" class
+        const card = button.closest('.card-action');
+        if (!card) {
+          console.error('Closest card with .card-action class not found!');
+          return;
+        }
+
+        // Get the unique identifier for the card
+        const cardId = card.dataset.cardId;
+
+        // Apply Notiflix Block to the specific card
+        Block.standard(`[data-card-id="${cardId}"]`, {
+          backgroundColor:
+            document.documentElement.getAttribute('data-bs-theme') === 'dark'
+              ? 'rgba(' + window.Helpers.getCssVar('pure-black-rgb') + ', 0.5)'
+              : 'rgba(' + window.Helpers.getCssVar('white-rgb') + ', 0.5)',
+          svgSize: '0px'
+        });
+
+        // Inject custom spinner HTML into the blocked card
+        const customSpinnerHTML = `
+          <div class="sk-fold sk-primary">
+            <div class="sk-fold-cube"></div>
+            <div class="sk-fold-cube"></div>
+            <div class="sk-fold-cube"></div>
+            <div class="sk-fold-cube"></div>
+          </div>
+          <h5>LOADING...</h5>
+        `;
+        const notiflixBlock = card.querySelector('.notiflix-block');
+        if (notiflixBlock) {
+          notiflixBlock.innerHTML = customSpinnerHTML;
+        }
+
+        // Simulate an async operation and unblock the card
+        setTimeout(function () {
+          Block.remove(`[data-card-id="${cardId}"]`);
+
+          // Check if a card alert exists, and add the alert message
+          const cardAlert = card.querySelector('.card-alert');
+          if (cardAlert) {
+            cardAlert.innerHTML = `
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <span class="fw-medium">Holy grail!</span> Your success/error message here.
+              </div>
+            `;
+          }
+        }, 2500); // Adjust the timeout duration as needed
+      });
+    });
+  }
+});

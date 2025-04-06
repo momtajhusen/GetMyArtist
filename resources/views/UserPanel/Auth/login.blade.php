@@ -136,7 +136,7 @@
             <label class="form-label" for="password">Password</label>
             <div class="input-group input-group-merge">
               <input type="password" id="password" class="form-control" name="password" placeholder="••••••••" aria-describedby="password" required/>
-              <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+              <span class="input-group-text cursor-pointer"><i class="ti tabler-eye-off"></i></span>
             </div>
           </div>
           <button type="submit" class="btn btn-primary d-grid w-100">
@@ -176,19 +176,19 @@
 
         <div class="d-flex justify-content-center">
           <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-facebook me-1_5">
-            <i class="tf-icons ti ti-brand-facebook-filled"></i>
+            <i class="tf-icons ti tabler-brand-facebook-filled"></i>
           </a>
 
           <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-twitter me-1_5">
-            <i class="tf-icons ti ti-brand-twitter-filled"></i>
+            <i class="tf-icons ti tabler-brand-twitter-filled"></i>
           </a>
 
           <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-github me-1_5">
-            <i class="tf-icons ti ti-brand-github-filled"></i>
+            <i class="tf-icons ti tabler-brand-github-filled"></i>
           </a>
 
           <a href="javascript:;" class="btn btn-sm btn-icon rounded-pill btn-text-google-plus">
-            <i class="tf-icons ti ti-brand-google-filled"></i>
+            <i class="tf-icons ti tabler-brand-google-filled"></i>
           </a>
         </div>
       </div>

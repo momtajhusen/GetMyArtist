@@ -1,1 +1,359 @@
-"use strict";document.addEventListener("DOMContentLoaded",function(){{const r=document.querySelector(".email-list"),i=[].slice.call(document.querySelectorAll(".email-list-item")),o=[].slice.call(document.querySelectorAll(".email-list-item-input")),s=document.querySelector(".app-email-view-content"),c=document.querySelector(".email-filters"),d=[].slice.call(document.querySelectorAll(".email-filter-folders li")),n=document.querySelector(".email-editor"),m=document.querySelector(".app-email-sidebar"),u=document.querySelector(".app-overlay"),p=document.querySelector(".email-reply-editor"),v=[].slice.call(document.querySelectorAll(".email-list-item-bookmark")),g=document.getElementById("email-select-all"),h=document.querySelector(".email-search-input"),S=document.querySelector(".email-compose-toggle-cc"),y=document.querySelector(".email-compose-toggle-bcc"),k=document.querySelector(".app-email-compose"),f=document.querySelector(".email-list-delete"),L=document.querySelector(".email-list-read"),q=document.querySelector(".email-list-empty"),b=document.querySelector(".email-refresh"),E=document.getElementById("app-email-view"),w=[].slice.call(document.querySelectorAll(".email-filter-folders li")),C=[].slice.call(document.querySelectorAll(".email-list-item-actions li"));if(r&&new PerfectScrollbar(r,{wheelPropagation:!1,suppressScrollX:!0}),c&&new PerfectScrollbar(c,{wheelPropagation:!1,suppressScrollX:!0}),s&&new PerfectScrollbar(s,{wheelPropagation:!1,suppressScrollX:!0}),n&&new Quill(".email-editor",{modules:{toolbar:".email-editor-toolbar"},placeholder:"Message ",theme:"snow"}),p&&new Quill(".email-reply-editor",{modules:{toolbar:".email-reply-toolbar"},placeholder:"Write your message... ",theme:"snow"}),v&&v.forEach(e=>{e.addEventListener("click",e=>{var t=e.currentTarget.parentNode.parentNode,l=t.getAttribute("data-starred");e.stopPropagation(),l?t.removeAttribute("data-starred"):t.setAttribute("data-starred","true")})}),g&&g.addEventListener("click",e=>{e.currentTarget.checked?o.forEach(e=>e.checked=1):o.forEach(e=>e.checked=0)}),o&&o.forEach(e=>{e.addEventListener("click",e=>{e.stopPropagation();let t=0;o.forEach(e=>{e.checked&&t++}),t<o.length?0==t?g.indeterminate=!1:g.indeterminate=!0:t==o.length?(g.indeterminate=!1,g.checked=!0):g.indeterminate=!1})}),h&&h.addEventListener("keyup",e=>{let l=e.currentTarget.value.toLowerCase(),t={},a=document.querySelector(".email-filter-folders .active").getAttribute("data-target");(t="inbox"!=a?[].slice.call(document.querySelectorAll(".email-list-item[data-"+a+'="true"]')):[].slice.call(document.querySelectorAll(".email-list-item"))).forEach(e=>{var t=e.textContent.toLowerCase();l?-1<t.indexOf(l)?e.classList.add("d-block"):e.classList.add("d-none"):e.classList.remove("d-none")})}),d.forEach(e=>{e.addEventListener("click",e=>{let t=e.currentTarget,l=t.getAttribute("data-target");m.classList.remove("show"),u.classList.remove("show"),Helpers._removeClass("active",d),t.classList.add("active"),i.forEach(e=>{"inbox"==l||e.hasAttribute("data-"+l)?(e.classList.add("d-block"),e.classList.remove("d-none")):(e.classList.add("d-none"),e.classList.remove("d-block"))})})}),y&&y.addEventListener("click",e=>{Helpers._toggleClass(document.querySelector(".email-compose-bcc"),"d-block","d-none")}),S&&S.addEventListener("click",e=>{Helpers._toggleClass(document.querySelector(".email-compose-cc"),"d-block","d-none")}),k.addEventListener("hidden.bs.modal",e=>{document.querySelector(".email-editor .ql-editor").innerHTML="",$("#emailContacts").val(""),a()}),f&&f.addEventListener("click",e=>{o.forEach(e=>{e.checked&&e.parentNode.closest("li.email-list-item").remove()}),g.indeterminate=!1,g.checked=!1,0==document.querySelectorAll(".email-list-item").length&&q.classList.remove("d-none")}),L&&L.addEventListener("click",e=>{o.forEach(e=>{e.checked&&(e.checked=!1,e.parentNode.closest("li.email-list-item").classList.add("email-marked-read"),e=e.parentNode.closest("li.email-list-item").querySelector(".email-list-item-actions li"),Helpers._hasClass("email-read",e))&&(e.classList.remove("email-read"),e.classList.add("email-unread"),e.querySelector("i").classList.remove("ti-mail-opened"),e.querySelector("i").classList.add("ti-mail"))}),g.indeterminate=!1,g.checked=!1}),b&&r){let t=$(".email-list"),l=new PerfectScrollbar(r,{wheelPropagation:!1,suppressScrollX:!0});b.addEventListener("click",e=>{t.block({message:'<div class="spinner-border text-primary" role="status"></div>',timeout:1e3,css:{backgroundColor:"transparent",border:"0"},overlayCSS:{backgroundColor:"#000",opacity:.1},onBlock:function(){l.settings.suppressScrollY=!0},onUnblock:function(){l.settings.suppressScrollY=!1}})})}var l=$(".email-earlier-msgs");l.length&&l.on("click",function(){var e=$(this);e.parents().find(".email-card-last").addClass("hide-pseudo"),e.next(".email-card-prev").slideToggle(),e.remove()});let t=$("#emailContacts");function a(){function e(e){return e.id?"<div class='d-flex flex-wrap align-items-center'><div class='avatar avatar-xs me-2 w-px-20 h-px-20'><img src='"+assetsPath+"img/avatars/"+$(e.element).data("avatar")+"' alt='avatar' class='rounded-circle' /></div>"+e.text+"</div>":e.text}t.length&&t.wrap('<div class="position-relative"></div>').select2({placeholder:"Select value",dropdownParent:t.parent(),closeOnSelect:!1,templateResult:e,templateSelection:e,escapeMarkup:function(e){return e}})}a();let e=$(".app-email-view-content");e.find(".scroll-to-reply").on("click",function(){0===e[0].scrollTop&&e.animate({scrollTop:e[0].scrollHeight},1500)}),w&&w.forEach(e=>{e.addEventListener("click",e=>{E.classList.remove("show")})}),C&&C.forEach(e=>{e.addEventListener("click",e=>{e.stopPropagation();e=e.currentTarget;Helpers._hasClass("email-delete",e)?(e.parentNode.closest("li.email-list-item").remove(),0==document.querySelectorAll(".email-list-item").length&&q.classList.remove("d-none")):Helpers._hasClass("email-read",e)?(e.parentNode.closest("li.email-list-item").classList.add("email-marked-read"),Helpers._toggleClass(e,"email-read","email-unread"),Helpers._toggleClass(e.querySelector("i"),"ti-mail-opened","ti-mail")):Helpers._hasClass("email-unread",e)&&(e.parentNode.closest("li.email-list-item").classList.remove("email-marked-read"),Helpers._toggleClass(e,"email-read","email-unread"),Helpers._toggleClass(e.querySelector("i"),"ti-mail-opened","ti-mail"))})})}});
+/**
+ * App Email
+ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function () {
+  (function () {
+    // Utility function to initialize PerfectScrollbar
+    const initPerfectScrollbar = (element, options = { wheelPropagation: false, suppressScrollX: true }) => {
+      if (element) new PerfectScrollbar(element, options);
+    };
+
+    // Query selectors for elements and collections
+    const selectors = {
+      emailList: document.querySelector('.email-list'),
+      emailListItems: Array.from(document.querySelectorAll('.email-list-item')),
+      emailListItemInputs: Array.from(document.querySelectorAll('.email-list-item-input')),
+      emailView: document.querySelector('.app-email-view-content'),
+      emailFilters: document.querySelector('.email-filters'),
+      emailFilterByFolders: Array.from(document.querySelectorAll('.email-filter-folders li')),
+      emailEditor: document.querySelector('.email-editor'),
+      appEmailSidebar: document.querySelector('.app-email-sidebar'),
+      appOverlay: document.querySelector('.app-overlay'),
+      emailReplyEditor: document.querySelector('.email-reply-editor'),
+      bookmarkEmail: Array.from(document.querySelectorAll('.email-list-item-bookmark')),
+      selectAllEmails: document.getElementById('email-select-all'),
+      emailSearch: document.querySelector('.email-search-input'),
+      toggleCC: document.querySelector('.email-compose-toggle-cc'),
+      toggleBCC: document.querySelector('.email-compose-toggle-bcc'),
+      emailCompose: document.querySelector('.app-email-compose'),
+      emailListDelete: document.querySelector('.email-list-delete'),
+      emailListRead: document.querySelector('.email-list-read'),
+      emailListEmpty: document.querySelector('.email-list-empty'),
+      refreshEmails: document.querySelector('.email-refresh'),
+      emailViewContainer: document.getElementById('app-email-view'),
+      emailFilterFolderLists: Array.from(document.querySelectorAll('.email-filter-folders li')),
+      emailListItemActions: Array.from(document.querySelectorAll('.email-list-item-actions li'))
+    };
+
+    // Initialize scrollbars where needed
+    initPerfectScrollbar(selectors.emailList);
+    initPerfectScrollbar(selectors.emailFilters);
+    initPerfectScrollbar(selectors.emailView);
+
+    // Utility function to initialize Quill Editor
+    const initQuillEditor = (selector, toolbar) => {
+      if (selector) {
+        new Quill(selector, {
+          modules: { toolbar },
+          placeholder: 'Message',
+          theme: 'snow'
+        });
+      }
+    };
+
+    // Initialize editors
+    initQuillEditor(selectors.emailEditor, '.email-editor-toolbar');
+    initQuillEditor(selectors.emailReplyEditor, '.email-reply-toolbar');
+
+    // Bookmark email functionality
+    selectors.bookmarkEmail.forEach(emailItem => {
+      emailItem.addEventListener('click', e => {
+        const emailItemParent = e.currentTarget.closest('.email-list-item');
+        e.stopPropagation();
+
+        if (emailItemParent.hasAttribute('data-starred')) {
+          // If attribute exists, remove it
+          emailItemParent.removeAttribute('data-starred');
+        } else {
+          // If attribute does not exist, set it with the value "true"
+          emailItemParent.setAttribute('data-starred', 'true');
+        }
+      });
+    });
+
+    // Select all functionality
+    if (selectors.selectAllEmails) {
+      selectors.selectAllEmails.addEventListener('click', e => {
+        selectors.emailListItemInputs.forEach(input => {
+          input.checked = e.currentTarget.checked;
+        });
+      });
+    }
+
+    // Select single email and update 'Select All' checkbox state
+    if (selectors.emailListItemInputs) {
+      selectors.emailListItemInputs.forEach(emailListItemInput => {
+        emailListItemInput.addEventListener('click', e => {
+          e.stopPropagation();
+
+          // Count checked inputs
+          const checkedCount = selectors.emailListItemInputs.filter(input => input.checked).length;
+          const totalInputs = selectors.emailListItemInputs.length;
+
+          // Update 'Select All' checkbox and indeterminate state
+          selectors.selectAllEmails.indeterminate = checkedCount > 0 && checkedCount < totalInputs;
+          selectors.selectAllEmails.checked = checkedCount === totalInputs;
+        });
+      });
+    }
+
+    // Search emails based on input text
+    if (selectors.emailSearch) {
+      selectors.emailSearch.addEventListener('keyup', e => {
+        const searchValue = e.currentTarget.value.toLowerCase();
+        const activeFolderFilter = document.querySelector('.email-filter-folders .active');
+        const selectedFolder = activeFolderFilter ? activeFolderFilter.getAttribute('data-target') : 'inbox';
+
+        // Filter emails based on the active folder
+        const emailListItems =
+          selectedFolder !== 'inbox'
+            ? Array.from(document.querySelectorAll(`.email-list-item[data-${selectedFolder}="true"]`))
+            : selectors.emailListItems;
+
+        // Show/hide emails based on the search term
+        emailListItems.forEach(emailItem => {
+          const itemText = emailItem.textContent.toLowerCase();
+          emailItem.classList.toggle('d-block', itemText.includes(searchValue));
+          emailItem.classList.toggle('d-none', !itemText.includes(searchValue));
+        });
+      });
+    }
+
+    // Filter emails based on folder type (Inbox, Sent, Draft, etc.)
+    selectors.emailFilterByFolders.forEach(folder => {
+      folder.addEventListener('click', e => {
+        const targetFolder = e.currentTarget.getAttribute('data-target');
+
+        // Hide sidebar and overlay
+        selectors.appEmailSidebar.classList.remove('show');
+        selectors.appOverlay.classList.remove('show');
+
+        // Update active class for folder filters
+        selectors.emailFilterByFolders.forEach(f => f.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+
+        // Filter email items based on selected folder
+        selectors.emailListItems.forEach(emailItem => {
+          const matchesFolder = targetFolder === 'inbox' || emailItem.hasAttribute(`data-${targetFolder}`);
+          emailItem.classList.toggle('d-block', matchesFolder);
+          emailItem.classList.toggle('d-none', !matchesFolder);
+        });
+      });
+    });
+
+    // Toggle visibility of CC/BCC input fields
+    const toggleVisibility = selector => {
+      document.querySelector(selector).classList.toggle('d-block');
+      document.querySelector(selector).classList.toggle('d-none');
+    };
+
+    if (selectors.toggleBCC) {
+      selectors.toggleBCC.addEventListener('click', () => toggleVisibility('.email-compose-bcc'));
+    }
+
+    if (selectors.toggleCC) {
+      selectors.toggleCC.addEventListener('click', () => toggleVisibility('.email-compose-cc'));
+    }
+
+    // Clear compose email message inputs when modal is hidden
+    selectors.emailCompose.addEventListener('hidden.bs.modal', () => {
+      document.querySelector('.email-editor .ql-editor').innerHTML = '';
+      document.getElementById('emailContacts').value = '';
+      initSelect2();
+    });
+
+    // Delete selected emails
+    if (selectors.emailListDelete) {
+      selectors.emailListDelete.addEventListener('click', () => {
+        selectors.emailListItemInputs.forEach(input => {
+          if (input.checked) {
+            input.closest('li.email-list-item').remove();
+          }
+        });
+        selectors.selectAllEmails.indeterminate = false;
+        selectors.selectAllEmails.checked = false;
+
+        // Show empty message if no emails are left
+        if (selectors.emailListItems.length === 0) {
+          selectors.emailListEmpty.classList.remove('d-none');
+        }
+      });
+    }
+
+    // Mark selected emails as read
+    if (selectors.emailListRead) {
+      selectors.emailListRead.addEventListener('click', () => {
+        selectors.emailListItemInputs.forEach(input => {
+          if (input.checked) {
+            input.checked = false;
+            const emailItem = input.closest('li.email-list-item');
+            emailItem.classList.add('email-marked-read');
+
+            // Update envelope icon
+            const emailActions = emailItem.querySelector('.email-list-item-actions li');
+            emailActions.classList.replace('email-read', 'email-unread');
+            const icon = emailActions.querySelector('i');
+            icon.classList.replace('tabler-mail-opened', 'tabler-mail');
+          }
+        });
+        selectors.selectAllEmails.indeterminate = false;
+        selectors.selectAllEmails.checked = false;
+      });
+    }
+
+    // Refresh emails with loading animation
+    if (selectors.refreshEmails && selectors.emailList) {
+      const emailListClass = '.email-list';
+      const emailListInstance = new PerfectScrollbar(selectors.emailList, {
+        wheelPropagation: false,
+        suppressScrollX: true
+      });
+
+      selectors.refreshEmails.addEventListener('click', () => {
+        // Block the email list section with Notiflix
+        Block.standard(emailListClass, {
+          backgroundColor: 'rgba(' + window.Helpers.getCssVar('black-rgb') + ', 0.1)',
+          svgSize: '0px'
+        });
+
+        // Add custom spinner to the Notiflix block
+        const customSpinner = document.createElement('div');
+        customSpinner.classList.add('spinner-border', 'text-primary');
+        customSpinner.setAttribute('role', 'status');
+
+        const notiflixBlock = document.querySelector('.email-list .notiflix-block');
+        if (notiflixBlock) {
+          notiflixBlock.appendChild(customSpinner);
+        }
+
+        // Simulate a timeout and unblock
+        setTimeout(() => {
+          // Disable vertical scroll suppression
+          emailListInstance.settings.suppressScrollY = false;
+          // Unblock the section
+          Block.remove(emailListClass);
+        }, 1000);
+
+        // Suppress scroll during the block
+        emailListInstance.settings.suppressScrollY = true;
+      });
+    }
+
+    // Toggle visibility of earlier messages
+
+    const earlierMsg = document.querySelector('.email-earlier-msgs');
+
+    if (earlierMsg) {
+      earlierMsg.addEventListener('click', () => {
+        const emailCardLast = document.querySelector('.email-card-last');
+        const emailCardPrev = earlierMsg.nextElementSibling;
+
+        if (emailCardLast) emailCardLast.classList.add('hide-pseudo');
+
+        // Vanilla JavaScript slideToggle effect
+        if (emailCardPrev) {
+          emailCardPrev.style.display =
+            emailCardPrev.style.display === 'none' || !emailCardPrev.style.display ? 'block' : 'none';
+          emailCardPrev.classList.toggle('slide-toggle');
+        }
+
+        // Remove the earlier message link after expanding
+        earlierMsg.remove();
+      });
+    }
+
+    // Email contacts (select2)
+    // ? Using jquery vars due to select2 jQuery dependency
+    let emailContacts = $('#emailContacts');
+    function initSelect2() {
+      if (emailContacts.length) {
+        function renderContactsAvatar(option) {
+          if (!option.id) {
+            return option.text;
+          }
+          let $avatar =
+            "<div class='d-flex flex-wrap align-items-center'>" +
+            "<div class='avatar avatar-xs me-2 w-px-20 h-px-20'>" +
+            "<img src='" +
+            assetsPath +
+            'img/avatars/' +
+            $(option.element).data('avatar') +
+            "' alt='avatar' class='rounded-circle' />" +
+            '</div>' +
+            option.text +
+            '</div>';
+
+          return $avatar;
+        }
+        emailContacts.wrap('<div class="position-relative"></div>').select2({
+          placeholder: 'Select value',
+          dropdownParent: emailContacts.parent(),
+          closeOnSelect: false,
+          templateResult: renderContactsAvatar,
+          templateSelection: renderContactsAvatar,
+          escapeMarkup: function (es) {
+            return es;
+          }
+        });
+      }
+    }
+    initSelect2();
+
+    // Scroll to bottom on reply click
+    const emailViewContent = document.querySelector('.app-email-view-content');
+    const scrollToReplyButton = emailViewContent ? emailViewContent.querySelector('.scroll-to-reply') : null;
+
+    if (scrollToReplyButton && emailViewContent) {
+      scrollToReplyButton.addEventListener('click', () => {
+        if (emailViewContent.scrollTop === 0) {
+          // Smooth scroll animation to the bottom
+          emailViewContent.scrollTo({
+            top: emailViewContent.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
+
+    // Close view on email filter folder list click
+    if (selectors.emailFilterFolderLists) {
+      selectors.emailFilterFolderLists.forEach(folder => {
+        folder.addEventListener('click', () => {
+          selectors.emailViewContainer.classList.remove('show');
+        });
+      });
+    }
+
+    // Email List Items Actions
+    if (selectors.emailListItemActions) {
+      selectors.emailListItemActions.forEach(action => {
+        action.addEventListener('click', e => {
+          e.stopPropagation();
+          const emailItem = action.closest('li.email-list-item');
+
+          if (action.classList.contains('email-delete')) {
+            // Delete email item
+            emailItem.remove();
+
+            // Show empty message if no emails are left
+            if (!document.querySelectorAll('.email-list-item').length) {
+              selectors.emailListEmpty.classList.remove('d-none');
+            }
+          } else if (action.classList.contains('email-read') || action.classList.contains('email-unread')) {
+            // Toggle read/unread state
+            const icon = action.querySelector('i');
+
+            emailItem.classList.toggle('email-marked-read', action.classList.contains('email-read'));
+            action.classList.toggle('email-read');
+            action.classList.toggle('email-unread');
+            icon.classList.toggle('tabler-mail-opened');
+            icon.classList.toggle('tabler-mail');
+          }
+        });
+      });
+    }
+  })();
+});

@@ -106,7 +106,7 @@
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
         <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
-        <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+        <i class="ti tabler-x d-block d-xl-none ti-md align-middle"></i>
       </a>
     </div>
 
@@ -131,7 +131,7 @@
         
             <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="ti ti-menu-2 ti-md"></i>
+                <i class="ti tabler-menu-2 ti-md"></i>
               </a>
             </div>
             
@@ -142,7 +142,7 @@
               <div class="navbar-nav align-items-center">
                 <div class="nav-item navbar-search-wrapper mb-0">
                   <a class="nav-item nav-link search-toggler d-flex align-items-center px-0" href="javascript:void(0);">
-                    <i class="ti ti-search ti-md me-2 me-lg-4 ti-lg"></i>
+                    <i class="ti tabler-search ti-md me-2 me-lg-4 ti-lg"></i>
                     <span class="d-none d-md-inline-block text-muted fw-normal">Search (Ctrl+/)</span>
                   </a>
                 </div>
@@ -155,7 +155,7 @@
                 <!-- Language -->
                 <li class="nav-item dropdown-language dropdown">
                   <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class='ti ti-language rounded-circle ti-md'></i>
+                    <i class='ti tabler-language rounded-circle ti-md'></i>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
@@ -185,22 +185,22 @@
                 <!-- Style Switcher -->
                 <li class="nav-item dropdown-style-switcher dropdown">
                   <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class='ti ti-md'></i>
+                    <i class='ti tabler-md'></i>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                     <li>
                       <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                        <span class="align-middle"><i class='ti ti-sun ti-md me-3'></i>Light</span>
+                        <span class="align-middle"><i class='ti tabler-sun ti-md me-3'></i>Light</span>
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                        <span class="align-middle"><i class="ti ti-moon-stars ti-md me-3"></i>Dark</span>
+                        <span class="align-middle"><i class="ti tabler-moon-stars ti-md me-3"></i>Dark</span>
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                        <span class="align-middle"><i class="ti ti-device-desktop-analytics ti-md me-3"></i>System</span>
+                        <span class="align-middle"><i class="ti tabler-device-desktop-analytics ti-md me-3"></i>System</span>
                       </a>
                     </li>
                   </ul>
@@ -210,27 +210,27 @@
                 <!-- Quick links  -->
                 <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
                   <a class="nav-link btn btn-text-secondary btn-icon rounded-pill btn-icon dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                    <i class='ti ti-layout-grid-add ti-md'></i>
+                    <i class='ti tabler-layout-grid-add ti-md'></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-end p-0">
                     <div class="dropdown-menu-header border-bottom">
                       <div class="dropdown-header d-flex align-items-center py-3">
                         <h6 class="mb-0 me-auto">Shortcuts</h6>
-                        <a href="javascript:void(0)" class="btn btn-text-secondary rounded-pill btn-icon dropdown-shortcuts-add" data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i class="ti ti-plus text-heading"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-text-secondary rounded-pill btn-icon dropdown-shortcuts-add" data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i class="ti tabler-plus text-heading"></i></a>
                       </div>
                     </div>
                     <div class="dropdown-shortcuts-list scrollable-container">
                       <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-calendar ti-26px text-heading"></i>
+                            <i class="ti tabler-calendar ti-26px text-heading"></i>
                           </span>
                           <a href="app-calendar.html" class="stretched-link">Calendar</a>
                           <small>Appointments</small>
                         </div>
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-file-dollar ti-26px text-heading"></i>
+                            <i class="ti tabler-file-dollar ti-26px text-heading"></i>
                           </span>
                           <a href="app-invoice-list.html" class="stretched-link">Invoice App</a>
                           <small>Manage Accounts</small>
@@ -239,14 +239,14 @@
                       <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-user ti-26px text-heading"></i>
+                            <i class="ti tabler-user ti-26px text-heading"></i>
                           </span>
                           <a href="app-user-list.html" class="stretched-link">User App</a>
                           <small>Manage Users</small>
                         </div>
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-users ti-26px text-heading"></i>
+                            <i class="ti tabler-users ti-26px text-heading"></i>
                           </span>
                           <a href="app-access-roles.html" class="stretched-link">Role Management</a>
                           <small>Permission</small>
@@ -255,14 +255,14 @@
                       <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-device-desktop-analytics ti-26px text-heading"></i>
+                            <i class="ti tabler-device-desktop-analytics ti-26px text-heading"></i>
                           </span>
                           <a href="index-2.html" class="stretched-link">Dashboard</a>
                           <small>User Dashboard</small>
                         </div>
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-settings ti-26px text-heading"></i>
+                            <i class="ti tabler-settings ti-26px text-heading"></i>
                           </span>
                           <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>
                           <small>Account Settings</small>
@@ -271,14 +271,14 @@
                       <div class="row row-bordered overflow-visible g-0">
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-help ti-26px text-heading"></i>
+                            <i class="ti tabler-help ti-26px text-heading"></i>
                           </span>
                           <a href="pages-faq.html" class="stretched-link">FAQs</a>
                           <small>FAQs & Articles</small>
                         </div>
                         <div class="dropdown-shortcuts-item col">
                           <span class="dropdown-shortcuts-icon rounded-circle mb-3">
-                            <i class="ti ti-square ti-26px text-heading"></i>
+                            <i class="ti tabler-square ti-26px text-heading"></i>
                           </span>
                           <a href="modal-examples.html" class="stretched-link">Modals</a>
                           <small>Useful Popups</small>
@@ -293,7 +293,7 @@
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
                   <a class="nav-link btn btn-text-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <span class="position-relative">
-                      <i class="ti ti-bell ti-md"></i>
+                      <i class="ti tabler-bell ti-md"></i>
                       <span class="badge rounded-pill bg-danger badge-dot badge-notifications border"></span>
                     </span>
                   </a>
@@ -303,7 +303,7 @@
                         <h6 class="mb-0 me-auto">Notification</h6>
                         <div class="d-flex align-items-center h6 mb-0">
                           <span class="badge bg-label-primary me-2">8 New</span>
-                          <a href="javascript:void(0)" class="btn btn-text-secondary rounded-pill btn-icon dropdown-notifications-all" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="ti ti-mail-opened text-heading"></i></a>
+                          <a href="javascript:void(0)" class="btn btn-text-secondary rounded-pill btn-icon dropdown-notifications-all" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="ti tabler-mail-opened text-heading"></i></a>
                         </div>
                       </div>
                     </li>
@@ -323,7 +323,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -341,7 +341,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -359,7 +359,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -367,7 +367,7 @@
                           <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                               <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-success"><i class="ti ti-shopping-cart"></i></span>
+                                <span class="avatar-initial rounded-circle bg-label-success"><i class="ti tabler-shopping-cart"></i></span>
                               </div>
                             </div>
                             <div class="flex-grow-1">
@@ -377,7 +377,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -395,7 +395,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -403,7 +403,7 @@
                           <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                               <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-success"><i class="ti ti-chart-pie"></i></span>
+                                <span class="avatar-initial rounded-circle bg-label-success"><i class="ti tabler-chart-pie"></i></span>
                               </div>
                             </div>
                             <div class="flex-grow-1">
@@ -413,7 +413,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -431,7 +431,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -449,7 +449,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -457,7 +457,7 @@
                           <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                               <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-warning"><i class="ti ti-alert-triangle"></i></span>
+                                <span class="avatar-initial rounded-circle bg-label-warning"><i class="ti tabler-alert-triangle"></i></span>
                               </div>
                             </div>
                             <div class="flex-grow-1">
@@ -467,7 +467,7 @@
                             </div>
                             <div class="flex-shrink-0 dropdown-notifications-actions">
                               <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                              <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti tabler-x"></span></a>
                             </div>
                           </div>
                         </li>
@@ -512,18 +512,18 @@
                     </li>
                     <li>
                       <a class="dropdown-item" href="pages-profile-user.html">
-                        <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">My Profile</span>
+                        <i class="ti tabler-user me-3 ti-md"></i><span class="align-middle">My Profile</span>
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="pages-account-settings-account.html">
-                        <i class="ti ti-settings me-3 ti-md"></i><span class="align-middle">Settings</span>
+                        <i class="ti tabler-settings me-3 ti-md"></i><span class="align-middle">Settings</span>
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="pages-account-settings-billing.html">
                         <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 ti ti-file-dollar me-3 ti-md"></i><span class="flex-grow-1 align-middle">Billing</span>
+                          <i class="flex-shrink-0 ti tabler-file-dollar me-3 ti-md"></i><span class="flex-grow-1 align-middle">Billing</span>
                           <span class="flex-shrink-0 badge bg-danger d-flex align-items-center justify-content-center">4</span>
                         </span>
                       </a>
@@ -533,12 +533,12 @@
                     </li>
                     <li>
                       <a class="dropdown-item" href="pages-pricing.html">
-                        <i class="ti ti-currency-dollar me-3 ti-md"></i><span class="align-middle">Pricing</span>
+                        <i class="ti tabler-currency-dollar me-3 ti-md"></i><span class="align-middle">Pricing</span>
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="pages-faq.html">
-                        <i class="ti ti-question-mark me-3 ti-md"></i><span class="align-middle">FAQ</span>
+                        <i class="ti tabler-question-mark me-3 ti-md"></i><span class="align-middle">FAQ</span>
                       </a>
                     </li>
                     <li>
@@ -547,7 +547,7 @@
                               @csrf
                               <button type="submit" class="btn btn-sm btn-danger w-100 d-flex">
                                   <small class="align-middle">Logout</small>
-                                  <i class="ti ti-logout ms-2 ti-14px"></i>
+                                  <i class="ti tabler-logout ms-2 ti-14px"></i>
                               </button>
                           </form>
                       </div> 
@@ -563,7 +563,7 @@
             <!-- Search Small Screens -->
             <div class="navbar-search-wrapper search-input-wrapper  d-none">
               <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
-              <i class="ti ti-x search-toggler cursor-pointer"></i>
+              <i class="ti tabler-x search-toggler cursor-pointer"></i>
             </div>
             
       </nav>

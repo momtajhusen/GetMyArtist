@@ -1,1 +1,309 @@
-"use strict";const commentEditor=document.querySelector(".comment-editor");commentEditor&&new Quill(commentEditor,{modules:{toolbar:".comment-toolbar"},placeholder:"Write a Comment...",theme:"snow"}),$(function(){let e,t,a;a=(isDarkStyle?(e=config.colors_dark.borderColor,t=config.colors_dark.bodyBg,config.colors_dark):(e=config.colors.borderColor,t=config.colors.bodyBg,config.colors)).headingColor;var s=$(".datatables-category-list"),o=$(".select2");o.length&&o.each(function(){var e=$(this);e.wrap('<div class="position-relative"></div>').select2({dropdownParent:e.parent(),placeholder:e.data("placeholder")})}),s.length&&(s.DataTable({ajax:assetsPath+"json/ecommerce-category-list.json",columns:[{data:""},{data:"id"},{data:"categories"},{data:"total_products"},{data:"total_earnings"},{data:""}],columnDefs:[{className:"control",searchable:!1,orderable:!1,responsivePriority:1,targets:0,render:function(e,t,a,s){return""}},{targets:1,orderable:!1,searchable:!1,responsivePriority:4,checkboxes:!0,checkboxes:{selectAllRender:'<input type="checkbox" class="form-check-input">'},render:function(){return'<input type="checkbox" class="dt-checkboxes form-check-input">'}},{targets:2,responsivePriority:2,render:function(e,t,a,s){var o=a.categories,r=a.category_detail,n=a.cat_image,i=a.id;return'<div class="d-flex align-items-center"><div class="avatar-wrapper me-3 rounded-2 bg-label-secondary"><div class="avatar">'+(n?'<img src="'+assetsPath+"img/ecommerce-images/"+n+'" alt="Product-'+i+'" class="rounded-2">':'<span class="avatar-initial rounded-2 bg-label-'+["success","danger","warning","info","dark","primary","secondary"][Math.floor(6*Math.random())]+'">'+(n=(((n=(o=a.category_detail).match(/\b\w/g)||[]).shift()||"")+(n.pop()||"")).toUpperCase())+"</span>")+'</div></div><div class="d-flex flex-column justify-content-center"><span class="text-heading text-wrap fw-medium">'+o+'</span><span class="text-truncate mb-0 d-none d-sm-block"><small>'+r+"</small></span></div></div>"}},{targets:3,responsivePriority:3,render:function(e,t,a,s){return'<div class="text-sm-end">'+a.total_products+"</div>"}},{targets:4,orderable:!1,render:function(e,t,a,s){return"<div class='mb-0 text-sm-end'>"+a.total_earnings+"</div"}},{targets:-1,title:"Actions",searchable:!1,orderable:!1,render:function(e,t,a,s){return'<div class="d-flex align-items-sm-center justify-content-sm-center"><button class="btn btn-icon btn-text-secondary rounded-pill waves-effect waves-light"><i class="ti ti-edit"></i></button><button class="btn btn-icon btn-text-secondary rounded-pill waves-effect waves-light dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-md"></i></button><div class="dropdown-menu dropdown-menu-end m-0"><a href="javascript:0;" class="dropdown-item">View</a><a href="javascript:0;" class="dropdown-item">Suspend</a></div></div>'}}],order:[2,"desc"],dom:'<"card-header d-flex flex-wrap py-0 flex-column flex-sm-row"<f><"d-flex justify-content-center justify-content-md-end align-items-baseline"<"dt-action-buttons d-flex justify-content-center flex-md-row align-items-baseline"lB>>>t<"row mx-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',lengthMenu:[7,10,20,50,70,100],language:{sLengthMenu:"_MENU_",search:"",searchPlaceholder:"Search Category",paginate:{next:'<i class="ti ti-chevron-right ti-sm"></i>',previous:'<i class="ti ti-chevron-left ti-sm"></i>'}},buttons:[{text:'<i class="ti ti-plus ti-xs me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Add Category</span>',className:"add-new btn btn-primary ms-2 waves-effect waves-light",attr:{"data-bs-toggle":"offcanvas","data-bs-target":"#offcanvasEcommerceCategoryList"}}],responsive:{details:{display:$.fn.dataTable.Responsive.display.modal({header:function(e){return"Details of "+e.data().categories}}),type:"column",renderer:function(e,t,a){a=$.map(a,function(e,t){return""!==e.title?'<tr data-dt-row="'+e.rowIndex+'" data-dt-column="'+e.columnIndex+'"><td> '+e.title+':</td> <td class="ps-0">'+e.data+"</td></tr>":""}).join("");return!!a&&$('<table class="table"/><tbody />').append(a)}}}}),$(".dt-action-buttons").addClass("pt-0"),$(".dataTables_filter").addClass("me-3 mb-sm-6 mb-0 ps-0")),setTimeout(()=>{$(".dataTables_filter .form-control").removeClass("form-control-sm"),$(".dataTables_filter .form-control").addClass("ms-0"),$(".dataTables_length .form-select").removeClass("form-select-sm"),$(".dataTables_length .form-select").addClass("ms-0")},300)}),function(){var e=document.getElementById("eCommerceCategoryListForm");FormValidation.formValidation(e,{fields:{categoryTitle:{validators:{notEmpty:{message:"Please enter category title"}}},slug:{validators:{notEmpty:{message:"Please enter slug"}}}},plugins:{trigger:new FormValidation.plugins.Trigger,bootstrap5:new FormValidation.plugins.Bootstrap5({eleValidClass:"is-valid",rowSelector:function(e,t){return".mb-6"}}),submitButton:new FormValidation.plugins.SubmitButton,autoFocus:new FormValidation.plugins.AutoFocus}})}();
+/**
+ * App eCommerce Category List
+ */
+
+'use strict';
+
+// Comment editor
+
+const commentEditor = document.querySelector('.comment-editor');
+
+if (commentEditor) {
+  new Quill(commentEditor, {
+    modules: {
+      toolbar: '.comment-toolbar'
+    },
+    placeholder: 'Write a Comment...',
+    theme: 'snow'
+  });
+}
+
+// Datatable (js)
+document.addEventListener('DOMContentLoaded', function (e) {
+  var dt_category_list_table = document.querySelector('.datatables-category-list');
+
+  //select2 for dropdowns in offcanvas
+
+  var select2 = $('.select2');
+  if (select2.length) {
+    select2.each(function () {
+      var $this = $(this);
+      $this.wrap('<div class="position-relative"></div>').select2({
+        dropdownParent: $this.parent(),
+        placeholder: $this.data('placeholder') //for dynamic placeholder
+      });
+    });
+  }
+
+  // Customers List Datatable
+
+  if (dt_category_list_table) {
+    var dt_category = new DataTable(dt_category_list_table, {
+      ajax: assetsPath + 'json/ecommerce-category-list.json', // JSON file to add data
+      columns: [
+        // columns according to JSON
+        { data: 'id' },
+        { data: 'id', orderable: false, render: DataTable.render.select() },
+        { data: 'categories' },
+        { data: 'total_products' },
+        { data: 'total_earnings' },
+        { data: 'id' }
+      ],
+      columnDefs: [
+        {
+          // For Responsive
+          className: 'control',
+          searchable: false,
+          orderable: false,
+          responsivePriority: 1,
+          targets: 0,
+          render: function (data, type, full, meta) {
+            return '';
+          }
+        },
+        {
+          // For Checkboxes
+          targets: 1,
+          orderable: false,
+          searchable: false,
+          responsivePriority: 4,
+          checkboxes: true,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        },
+        {
+          targets: 2,
+          responsivePriority: 2,
+          render: function (data, type, full, meta) {
+            const name = full['categories'];
+            const categoryDetail = full['category_detail'];
+            const image = full['cat_image'];
+            const id = full['id'];
+            let output;
+            if (image) {
+              // For Product image
+              output = `<img src="${assetsPath}img/ecommerce-images/${image}" alt="Product-${id}" class="rounded">`;
+            } else {
+              // For Product badge
+              const stateNum = Math.floor(Math.random() * 6);
+              const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+              const state = states[stateNum];
+              const initials = (categoryDetail.match(/\b\w/g) || []).slice(0, 2).join('').toUpperCase();
+              output = `<span class="avatar-initial rounded-2 bg-label-${state}">${initials}</span>`;
+            }
+            // Creates full output for Categories and Category Detail
+            const rowOutput = `
+              <div class="d-flex align-items-center">
+                <div class="avatar-wrapper me-3 rounded-2 bg-label-secondary">
+                  <div class="avatar">${output}</div>
+                </div>
+                <div class="d-flex flex-column justify-content-center">
+                  <span class="text-heading text-wrap fw-medium">${name}</span>
+                  <span class="text-truncate mb-0 d-none d-sm-block"><small>${categoryDetail}</small></span>
+                </div>
+              </div>`;
+            return rowOutput;
+          }
+        },
+        {
+          // Total products
+          targets: 3,
+          responsivePriority: 3,
+          render: function (data, type, full, meta) {
+            const total_products = full['total_products'];
+            return '<div class="text-sm-end">' + total_products + '</div>';
+          }
+        },
+        {
+          // Total Earnings
+          targets: 4,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            const total_earnings = full['total_earnings'];
+            return "<div class='mb-0 text-sm-end'>" + total_earnings + '</div';
+          }
+        },
+        {
+          // Actions
+          targets: -1,
+          title: 'Actions',
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            return `
+              <div class="d-flex align-items-sm-center justify-content-sm-center">
+                <button class="btn btn-text-secondary rounded-pill waves-effect btn-icon"><i class="icon-base ti tabler-edit icon-22px"></i></button>
+                <button class="btn btn-text-secondary rounded-pill waves-effect btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                  <i class="icon-base ti tabler-dots-vertical icon-22px"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end m-0">
+                  <a href="javascript:void(0);" class="dropdown-item">View</a>
+                  <a href="javascript:void(0);" class="dropdown-item">Suspend</a>
+                </div>
+              </div>
+            `;
+          }
+        }
+      ],
+      select: {
+        style: 'multi',
+        selector: 'td:nth-child(2)'
+      },
+      order: [2, 'desc'],
+      displayLength: 7,
+      layout: {
+        topStart: {
+          rowClass: 'row m-3 my-0 justify-content-between',
+          features: [
+            {
+              search: {
+                placeholder: 'Search Category',
+                text: '_INPUT_'
+              }
+            }
+          ]
+        },
+        topEnd: {
+          rowClass: 'row m-3 my-0 justify-content-between',
+          features: {
+            pageLength: {
+              menu: [7, 10, 25, 50, 100],
+              text: '_MENU_'
+            },
+            buttons: [
+              {
+                text: `<i class="icon-base ti tabler-plus icon-16px me-0 me-sm-2"></i><span class="d-none d-sm-inline-block">Add Category</span>`,
+                className: 'add-new btn btn-primary',
+                attr: {
+                  'data-bs-toggle': 'offcanvas',
+                  'data-bs-target': '#offcanvasEcommerceCategoryList'
+                }
+              }
+            ]
+          }
+        },
+        bottomStart: {
+          rowClass: 'row mx-3 justify-content-between',
+          features: ['info']
+        },
+        bottomEnd: 'paging'
+      },
+      language: {
+        paginate: {
+          next: '<i class="icon-base ti tabler-chevron-right scaleX-n1-rtl icon-18px"></i>',
+          previous: '<i class="icon-base ti tabler-chevron-left scaleX-n1-rtl icon-18px"></i>',
+          first: '<i class="icon-base ti tabler-chevrons-left scaleX-n1-rtl icon-18px"></i>',
+          last: '<i class="icon-base ti tabler-chevrons-right scaleX-n1-rtl icon-18px"></i>'
+        }
+      },
+      // For responsive popup
+      responsive: {
+        details: {
+          display: DataTable.Responsive.display.modal({
+            header: function (row) {
+              const data = row.data();
+              return 'Details of ' + data['categories'];
+            }
+          }),
+          type: 'column',
+          renderer: function (api, rowIdx, columns) {
+            const data = columns
+              .map(function (col) {
+                return col.title !== '' // Do not show row in modal popup if title is blank (for check box)
+                  ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+                      <td>${col.title}:</td>
+                      <td>${col.data}</td>
+                    </tr>`
+                  : '';
+              })
+              .join('');
+
+            if (data) {
+              const div = document.createElement('div');
+              div.classList.add('table-responsive');
+              const table = document.createElement('table');
+              div.appendChild(table);
+              table.classList.add('table');
+              const tbody = document.createElement('tbody');
+              tbody.innerHTML = data;
+              table.appendChild(tbody);
+              return div;
+            }
+            return false;
+          }
+        }
+      }
+    });
+  }
+
+  // Filter form control to default size
+  // ? setTimeout used for category-list table initialization
+  setTimeout(() => {
+    const elementsToModify = [
+      { selector: '.dt-buttons .btn', classToRemove: 'btn-secondary' },
+      { selector: '.dt-buttons.btn-group', classToAdd: 'mb-md-0 mb-6' },
+      { selector: '.dt-search .form-control', classToRemove: 'form-control-sm', classToAdd: 'ms-0' },
+      { selector: '.dt-search', classToAdd: 'mb-0 mb-md-6' },
+      { selector: '.dt-length .form-select', classToRemove: 'form-select-sm' },
+      { selector: '.dt-layout-table', classToRemove: 'row mt-2', classToAdd: 'border-top' },
+      { selector: '.dt-layout-end', classToAdd: 'gap-md-2 gap-0 mt-0' },
+      { selector: '.dt-layout-start', classToAdd: 'mt-0' },
+      { selector: '.dt-layout-full', classToRemove: 'col-md col-12', classToAdd: 'table-responsive' }
+    ];
+
+    elementsToModify.forEach(({ selector, classToRemove, classToAdd }) => {
+      document.querySelectorAll(selector).forEach(element => {
+        if (classToRemove) {
+          classToRemove.split(' ').forEach(className => element.classList.remove(className));
+        }
+        if (classToAdd) {
+          classToAdd.split(' ').forEach(className => element.classList.add(className));
+        }
+      });
+    });
+  }, 100);
+});
+
+//For form validation
+(function () {
+  const eCommerceCategoryListForm = document.getElementById('eCommerceCategoryListForm');
+
+  //Add New customer Form Validation
+  const fv = FormValidation.formValidation(eCommerceCategoryListForm, {
+    fields: {
+      categoryTitle: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter category title'
+          }
+        }
+      },
+      slug: {
+        validators: {
+          notEmpty: {
+            message: 'Please enter slug'
+          }
+        }
+      }
+    },
+    plugins: {
+      trigger: new FormValidation.plugins.Trigger(),
+      bootstrap5: new FormValidation.plugins.Bootstrap5({
+        // Use this for enabling/changing valid/invalid class
+        eleValidClass: 'is-valid',
+        rowSelector: function (field, ele) {
+          // field is the field name & ele is the field element
+          return '.form-control-validation';
+        }
+      }),
+      submitButton: new FormValidation.plugins.SubmitButton(),
+      // Submit the form when all fields are valid
+      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+      autoFocus: new FormValidation.plugins.AutoFocus()
+    }
+  });
+})();

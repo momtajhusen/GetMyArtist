@@ -1,1 +1,384 @@
-"use strict";$(function(){let e,s,a;a=(isDarkStyle?(e=config.colors_dark.borderColor,s=config.colors_dark.bodyBg,config.colors_dark):(e=config.colors.borderColor,s=config.colors.bodyBg,config.colors)).headingColor;var t=$(".datatables-referral"),n={1:{title:"Paid",class:"bg-label-success"},2:{title:"Unpaid",class:"bg-label-warning"},3:{title:"Rejected",class:"bg-label-danger"}};t.length&&(t.DataTable({ajax:assetsPath+"json/ecommerce-referral.json",columns:[{data:""},{data:"id"},{data:"user"},{data:"referred_id"},{data:"status"},{data:"value"},{data:"earning"}],columnDefs:[{className:"control",searchable:!1,orderable:!1,responsivePriority:2,targets:0,render:function(t,e,s,a){return""}},{targets:1,orderable:!1,searchable:!1,responsivePriority:3,checkboxes:!0,checkboxes:{selectAllRender:'<input type="checkbox" class="form-check-input">'},render:function(){return'<input type="checkbox" class="dt-checkboxes form-check-input">'}},{targets:2,responsivePriority:1,render:function(t,e,s,a){var n=s.user,r=s.email,o=s.avatar;return'<div class="d-flex justify-content-start align-items-center customer-name"><div class="avatar-wrapper"><div class="avatar avatar-sm me-4">'+(o?'<img src="'+assetsPath+"img/avatars/"+o+'" alt="Avatar" class="rounded-circle">':'<span class="avatar-initial rounded-circle bg-label-'+["success","danger","warning","info","dark","primary","secondary"][Math.floor(6*Math.random())]+'">'+(o=(((o=(n=s.user).match(/\b\w/g)||[]).shift()||"")+(o.pop()||"")).toUpperCase())+"</span>")+'</div></div><div class="d-flex flex-column"><a href="app-ecommerce-customer-details-overview.html" class="text-heading"><span class="fw-medium">'+n+'</span></a><small class="text-nowrap">'+r+"</small></div></div>"}},{targets:3,render:function(t,e,s,a){return"<span>"+s.referred_id+"</span>"}},{targets:4,render:function(t,e,s,a){s=s.status;return'<span class="badge '+n[s].class+'" text-capitalized>'+n[s].title+"</span>"}},{targets:5,render:function(t,e,s,a){return"<span>"+s.value+"</span>"}},{targets:6,render:function(t,e,s,a){return'<span class="text-heading">'+s.earning+"</span > "}}],order:[[2,"asc"]],dom:'<"card-header d-flex flex-column flex-sm-row align-items-center py-0"<"head-label"><"d-flex align-items-center justify-content-end"l<"dt-action-buttons"B>>>t<"row mx-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',language:{sLengthMenu:"_MENU_",paginate:{next:'<i class="ti ti-chevron-right ti-sm"></i>',previous:'<i class="ti ti-chevron-left ti-sm"></i>'}},buttons:[{extend:"collection",className:"btn btn-label-secondary dropdown-toggle waves-effect waves-light",text:'<i class="ti ti-upload ti-xs me-2"></i>Export',buttons:[{extend:"print",text:'<i class="ti ti-printer me-2"></i>Print',className:"dropdown-item",exportOptions:{columns:[1,2,3,4,5],format:{body:function(t,e,s){var a;return t.length<=0?t:(t=$.parseHTML(t),a="",$.each(t,function(t,e){void 0!==e.classList&&e.classList.contains("user-name")?a+=e.lastChild.firstChild.textContent:void 0===e.innerText?a+=e.textContent:a+=e.innerText}),a)}}},customize:function(t){$(t.document.body).css("color",a).css("border-color",e).css("background-color",s),$(t.document.body).find("table").addClass("compact").css("color","inherit").css("border-color","inherit").css("background-color","inherit")}},{extend:"csv",text:'<i class="ti ti-file me-2" ></i>Csv',className:"dropdown-item",exportOptions:{columns:[1,2,3,4,5],format:{body:function(t,e,s){var a;return t.length<=0?t:(t=$.parseHTML(t),a="",$.each(t,function(t,e){void 0!==e.classList&&e.classList.contains("user-name")?a+=e.lastChild.firstChild.textContent:void 0===e.innerText?a+=e.textContent:a+=e.innerText}),a)}}}},{extend:"excel",text:'<i class="ti ti-file-export me-2"></i>Excel',className:"dropdown-item",exportOptions:{columns:[1,2,3,4,5],format:{body:function(t,e,s){var a;return t.length<=0?t:(t=$.parseHTML(t),a="",$.each(t,function(t,e){void 0!==e.classList&&e.classList.contains("user-name")?a+=e.lastChild.firstChild.textContent:void 0===e.innerText?a+=e.textContent:a+=e.innerText}),a)}}}},{extend:"pdf",text:'<i class="ti ti-file-text me-2"></i>Pdf',className:"dropdown-item",exportOptions:{columns:[1,2,3,4,5],format:{body:function(t,e,s){var a;return t.length<=0?t:(t=$.parseHTML(t),a="",$.each(t,function(t,e){void 0!==e.classList&&e.classList.contains("user-name")?a+=e.lastChild.firstChild.textContent:void 0===e.innerText?a+=e.textContent:a+=e.innerText}),a)}}}},{extend:"copy",text:'<i class="ti ti-copy me-2" ></i>Copy',className:"dropdown-item",exportOptions:{columns:[1,2,3,4,5],format:{body:function(t,e,s){var a;return t.length<=0?t:(t=$.parseHTML(t),a="",$.each(t,function(t,e){void 0!==e.classList&&e.classList.contains("user-name")?a+=e.lastChild.firstChild.textContent:void 0===e.innerText?a+=e.textContent:a+=e.innerText}),a)}}}}]}],responsive:{details:{display:$.fn.dataTable.Responsive.display.modal({header:function(t){return"Details of "+t.data().user}}),type:"column",renderer:function(t,e,s){s=$.map(s,function(t,e){return""!==t.title?'<tr data-dt-row="'+t.rowIndex+'" data-dt-column="'+t.columnIndex+'"><td>'+t.title+":</td> <td>"+t.data+"</td></tr>":""}).join("");return!!s&&$('<table class="table"/><tbody />').append(s)}}}}),$("div.head-label").html('<h5 class="card-title mb-0 text-nowrap mt-6 mt-sm-0">Referred users</h5>'),$(".dataTables_length").addClass("me-2 ms-n2 ms-sm-0"),$(".dt-action-buttons").addClass("pt-0")),setTimeout(()=>{$(".dataTables_filter .form-control").removeClass("form-control-sm"),$(".dataTables_length .form-select").removeClass("form-select-sm")},300)});
+/**
+ * Page eCommerce Referral
+ */
+
+'use strict';
+
+// Datatable (js)
+document.addEventListener('DOMContentLoaded', function (e) {
+  let borderColor, bodyBg, headingColor;
+  borderColor = config.colors.borderColor;
+  bodyBg = config.colors.bodyBg;
+  headingColor = config.colors.headingColor;
+
+  // Variable declaration for table
+  const dt_user_table = document.querySelector('.datatables-referral'),
+    customerView = 'app-ecommerce-customer-details-overview.html',
+    statusObj = {
+      1: { title: 'Paid', class: 'bg-label-success' },
+      2: { title: 'Unpaid', class: 'bg-label-warning' },
+      3: { title: 'Rejected', class: 'bg-label-danger' }
+    };
+
+  // Users datatable
+  if (dt_user_table) {
+    let tableTitle = document.createElement('h5');
+    tableTitle.classList.add('card-title', 'mb-0', 'text-md-start', 'text-center');
+    tableTitle.innerHTML = 'Referred users';
+    var dt_user = new DataTable(dt_user_table, {
+      ajax: assetsPath + 'json/ecommerce-referral.json', // JSON file to add data
+      columns: [
+        // columns according to JSON
+        { data: 'id' },
+        { data: 'id', orderable: false, render: DataTable.render.select() },
+        { data: 'user' },
+        { data: 'referred_id' },
+        { data: 'status' },
+        { data: 'value' },
+        { data: 'earning' }
+      ],
+      columnDefs: [
+        {
+          // For Responsive
+          className: 'control',
+          searchable: false,
+          orderable: false,
+          responsivePriority: 2,
+          targets: 0,
+          render: function (data, type, full, meta) {
+            return '';
+          }
+        },
+        {
+          // For Checkboxes
+          targets: 1,
+          orderable: false,
+          searchable: false,
+          responsivePriority: 3,
+          checkboxes: true,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        },
+        {
+          // eCommerce full name and email
+          targets: 2,
+          responsivePriority: 1,
+          render: function (data, type, full, meta) {
+            const userName = full['user'];
+            const email = full['email'];
+            const avatar = full['avatar'];
+            let output;
+
+            if (avatar) {
+              // For Avatar image
+              output = `<img src="${assetsPath}img/avatars/${avatar}" alt="Avatar" class="rounded-circle">`;
+            } else {
+              // For Avatar badge
+              const stateNum = Math.floor(Math.random() * 6);
+              const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+              const state = states[stateNum];
+              const initials = (userName.match(/\b\w/g) || []).slice(0, 2).join('').toUpperCase();
+              output = `<span class="avatar-initial rounded-circle bg-label-${state}">${initials}</span>`;
+            }
+
+            // Creates full output for row
+            const rowOutput = `
+              <div class="d-flex justify-content-start align-items-center customer-name">
+                <div class="avatar-wrapper">
+                  <div class="avatar avatar-sm me-4">${output}</div>
+                </div>
+                <div class="d-flex flex-column">
+                  <a href="${customerView}" class="text-heading"><span class="fw-medium">${userName}</span></a>
+                  <small class="text-nowrap">${email}</small>
+                </div>
+              </div>`;
+
+            return rowOutput;
+          }
+        },
+        {
+          // eCommerce Role
+          targets: 3,
+          render: function (data, type, full, meta) {
+            let role = full['referred_id'];
+
+            return '<span>' + role + '</span>';
+          }
+        },
+
+        {
+          // eCommerce Status
+          targets: 4,
+          render: function (data, type, full, meta) {
+            let status = full['status'];
+
+            return (
+              '<span class="badge ' +
+              statusObj[status].class +
+              '" text-capitalized>' +
+              statusObj[status].title +
+              '</span>'
+            );
+          }
+        },
+        {
+          // value
+          targets: 5,
+          render: function (data, type, full, meta) {
+            let plan = full['value'];
+
+            return '<span>' + plan + '</span>';
+          }
+        },
+        {
+          // earning
+          targets: 6,
+          render: function (data, type, full, meta) {
+            let earn = full['earning'];
+
+            return '<span class="text-heading">' + earn + '</span > ';
+          }
+        }
+      ],
+      select: {
+        style: 'multi',
+        selector: 'td:nth-child(2)'
+      },
+      order: [[2, 'asc']],
+      layout: {
+        topStart: {
+          rowClass: 'row m-3 my-0 justify-content-between',
+          features: [tableTitle]
+        },
+        topEnd: {
+          features: [
+            {
+              pageLength: {
+                menu: [10, 25, 50, 100],
+                text: '_MENU_'
+              }
+            },
+            {
+              buttons: [
+                {
+                  extend: 'collection',
+                  className: 'btn btn-label-primary dropdown-toggle',
+                  text: '<span class="d-flex align-items-center gap-1"><i class="icon-base ti tabler-upload icon-xs"></i> <span class="d-none d-sm-inline-block">Export</span></span>',
+                  buttons: [
+                    {
+                      extend: 'print',
+                      text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-printer me-1"></i>Print</span>`,
+                      className: 'dropdown-item',
+                      exportOptions: {
+                        columns: [3, 4, 5, 6, 7],
+                        format: {
+                          body: function (inner, coldex, rowdex) {
+                            if (inner.length <= 0) return inner;
+                            const el = new DOMParser().parseFromString(inner, 'text/html').body.childNodes;
+                            let result = '';
+                            el.forEach(item => {
+                              if (item.classList && item.classList.contains('user-name')) {
+                                result += item.lastChild.firstChild.textContent;
+                              } else {
+                                result += item.textContent || item.innerText || '';
+                              }
+                            });
+                            return result;
+                          }
+                        }
+                      },
+                      customize: function (win) {
+                        win.document.body.style.color = config.colors.headingColor;
+                        win.document.body.style.borderColor = config.colors.borderColor;
+                        win.document.body.style.backgroundColor = config.colors.bodyBg;
+                        const table = win.document.body.querySelector('table');
+                        table.classList.add('compact');
+                        table.style.color = 'inherit';
+                        table.style.borderColor = 'inherit';
+                        table.style.backgroundColor = 'inherit';
+                      }
+                    },
+                    {
+                      extend: 'csv',
+                      text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-file me-1"></i>Csv</span>`,
+                      className: 'dropdown-item',
+                      exportOptions: {
+                        columns: [3, 4, 5, 6, 7],
+                        format: {
+                          body: function (inner, coldex, rowdex) {
+                            if (inner.length <= 0) return inner;
+                            const el = new DOMParser().parseFromString(inner, 'text/html').body.childNodes;
+                            let result = '';
+                            el.forEach(item => {
+                              if (item.classList && item.classList.contains('user-name')) {
+                                result += item.lastChild.firstChild.textContent;
+                              } else {
+                                result += item.textContent || item.innerText || '';
+                              }
+                            });
+                            return result;
+                          }
+                        }
+                      }
+                    },
+                    {
+                      extend: 'excel',
+                      text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-upload me-1"></i>Excel</span>`,
+                      className: 'dropdown-item',
+                      exportOptions: {
+                        columns: [3, 4, 5, 6, 7],
+                        format: {
+                          body: function (inner, coldex, rowdex) {
+                            if (inner.length <= 0) return inner;
+                            const el = new DOMParser().parseFromString(inner, 'text/html').body.childNodes;
+                            let result = '';
+                            el.forEach(item => {
+                              if (item.classList && item.classList.contains('user-name')) {
+                                result += item.lastChild.firstChild.textContent;
+                              } else {
+                                result += item.textContent || item.innerText || '';
+                              }
+                            });
+                            return result;
+                          }
+                        }
+                      }
+                    },
+                    {
+                      extend: 'pdf',
+                      text: `<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-text me-1"></i>Pdf</span>`,
+                      className: 'dropdown-item',
+                      exportOptions: {
+                        columns: [3, 4, 5, 6, 7],
+                        format: {
+                          body: function (inner, coldex, rowdex) {
+                            if (inner.length <= 0) return inner;
+                            const el = new DOMParser().parseFromString(inner, 'text/html').body.childNodes;
+                            let result = '';
+                            el.forEach(item => {
+                              if (item.classList && item.classList.contains('user-name')) {
+                                result += item.lastChild.firstChild.textContent;
+                              } else {
+                                result += item.textContent || item.innerText || '';
+                              }
+                            });
+                            return result;
+                          }
+                        }
+                      }
+                    },
+                    {
+                      extend: 'copy',
+                      text: `<i class="icon-base ti tabler-copy me-1"></i>Copy`,
+                      className: 'dropdown-item',
+                      exportOptions: {
+                        columns: [3, 4, 5, 6, 7],
+                        format: {
+                          body: function (inner, coldex, rowdex) {
+                            if (inner.length <= 0) return inner;
+                            const el = new DOMParser().parseFromString(inner, 'text/html').body.childNodes;
+                            let result = '';
+                            el.forEach(item => {
+                              if (item.classList && item.classList.contains('user-name')) {
+                                result += item.lastChild.firstChild.textContent;
+                              } else {
+                                result += item.textContent || item.innerText || '';
+                              }
+                            });
+                            return result;
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        bottomStart: {
+          rowClass: 'row mx-3 justify-content-between',
+          features: ['info']
+        },
+        bottomEnd: 'paging'
+      },
+      language: {
+        paginate: {
+          next: '<i class="icon-base ti tabler-chevron-right scaleX-n1-rtl icon-18px"></i>',
+          previous: '<i class="icon-base ti tabler-chevron-left scaleX-n1-rtl icon-18px"></i>',
+          first: '<i class="icon-base ti tabler-chevrons-left scaleX-n1-rtl icon-18px"></i>',
+          last: '<i class="icon-base ti tabler-chevrons-right scaleX-n1-rtl icon-18px"></i>'
+        }
+      },
+      // For responsive popup
+      responsive: {
+        details: {
+          display: DataTable.Responsive.display.modal({
+            header: function (row) {
+              const data = row.data();
+              return 'Details of ' + data['user'];
+            }
+          }),
+          type: 'column',
+          renderer: function (api, rowIdx, columns) {
+            const data = columns
+              .map(function (col) {
+                return col.title !== '' // Do not show row in modal popup if title is blank (for check box)
+                  ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+                      <td>${col.title}:</td>
+                      <td>${col.data}</td>
+                    </tr>`
+                  : '';
+              })
+              .join('');
+
+            if (data) {
+              const div = document.createElement('div');
+              div.classList.add('table-responsive');
+              const table = document.createElement('table');
+              div.appendChild(table);
+              table.classList.add('table');
+              const tbody = document.createElement('tbody');
+              tbody.innerHTML = data;
+              table.appendChild(tbody);
+              return div;
+            }
+            return false;
+          }
+        }
+      }
+    });
+  }
+
+  // Filter form control to default size
+  // ? setTimeout used for referral table initialization
+  setTimeout(() => {
+    const elementsToModify = [
+      { selector: '.dt-buttons .btn', classToRemove: 'btn-secondary', classToAdd: 'btn-label-secondary' },
+      { selector: '.dt-search .form-control', classToRemove: 'form-control-sm' },
+      { selector: '.dt-length .form-select', classToRemove: 'form-select-sm' },
+      { selector: '.dt-length', classToAdd: 'me-2 ms-n2 ms-sm-0' },
+      { selector: '.dt-buttons', classToAdd: 'mb-md-0 mb-6 justify-content-center' },
+      { selector: '.dt-layout-table', classToRemove: 'row mt-2' },
+      { selector: '.dt-layout-start', classToAdd: 'mt-md-0 mt-4' },
+      { selector: '.dt-layout-end', classToAdd: 'mt-0' },
+      { selector: '.dt-layout-full', classToRemove: 'col-md col-12', classToAdd: 'table-responsive' }
+    ];
+
+    // Delete record
+    elementsToModify.forEach(({ selector, classToRemove, classToAdd }) => {
+      document.querySelectorAll(selector).forEach(element => {
+        if (classToRemove) {
+          classToRemove.split(' ').forEach(className => element.classList.remove(className));
+        }
+        if (classToAdd) {
+          classToAdd.split(' ').forEach(className => element.classList.add(className));
+        }
+      });
+    });
+  }, 100);
+});

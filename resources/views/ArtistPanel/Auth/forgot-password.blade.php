@@ -160,7 +160,7 @@
         </form>
         <div class="text-center">
           <a href="auth-login-cover.html" class="d-flex align-items-center justify-content-center">
-            <i class="ti ti-chevron-left scaleX-n1-rtl me-1_5"></i>
+            <i class="ti tabler-chevron-left scaleX-n1-rtl me-1_5"></i>
             Back to login
           </a>
         </div>

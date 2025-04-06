@@ -1,1 +1,97 @@
-"use strict";$(function(){var e=document.getElementById("createApp");const t=document.querySelector(".app-credit-card-mask"),n=document.querySelector(".app-expiry-date-mask"),c=document.querySelector(".app-cvv-code-mask");let r;function l(){t&&(r=new Cleave(t,{creditCard:!0,onCreditCardTypeChanged:function(e){document.querySelector(".app-card-type").innerHTML=""!=e&&"unknown"!=e?'<img src="'+assetsPath+"img/icons/payments/"+e+'-cc.png" class="cc-icon-image" height="28"/>':""}}))}n&&new Cleave(n,{date:!0,delimiter:"/",datePattern:["m","y"]}),c&&new Cleave(c,{numeral:!0,numeralPositiveOnly:!0}),e.addEventListener("show.bs.modal",function(e){var t=document.querySelector("#wizard-create-app");if(null!==t){var n=[].slice.call(t.querySelectorAll(".btn-next")),c=[].slice.call(t.querySelectorAll(".btn-prev")),r=t.querySelector(".btn-submit");const a=new Stepper(t,{linear:!1});n&&n.forEach(e=>{e.addEventListener("click",e=>{a.next(),l()})}),c&&c.forEach(e=>{e.addEventListener("click",e=>{a.previous(),l()})}),r&&r.addEventListener("click",e=>{alert("Submitted..!!")})}})});
+/**
+ *  Modal Example Create App
+ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  // Modal id
+  const appModal = document.getElementById('createApp');
+
+  // Credit Card
+  const creditCardMask1 = document.querySelector('.app-credit-card-mask'),
+    expiryDateMask1 = document.querySelector('.app-expiry-date-mask'),
+    cvvMask1 = document.querySelector('.app-cvv-code-mask');
+  let cleave;
+
+  // Cleave JS card Mask
+  setTimeout(() => {
+    if (creditCardMask1) {
+      creditCardMask1.addEventListener('input', event => {
+        let cleanValue = event.target.value.replace(/\D/g, '');
+        let cardType = getCreditCardType(cleanValue);
+        creditCardMask1.value = formatCreditCard(cleanValue);
+        if (cardType && cardType !== 'unknown' && cardType !== 'general') {
+          document.querySelector('.app-card-type').innerHTML =
+            `<img src="${assetsPath}img/icons/payments/${cardType}-cc.png" height="26"/>`;
+        } else {
+          document.querySelector('.app-card-type').innerHTML = '';
+        }
+      });
+
+      registerCursorTracker({
+        input: creditCardMask1,
+        delimiter: ' '
+      });
+    }
+  }, 200);
+
+  // Expiry Date Mask
+  if (expiryDateMask1) {
+    expiryDateMask1.addEventListener('input', event => {
+      expiryDateMask1.value = formatDate(event.target.value, {
+        delimiter: '/',
+        datePattern: ['m', 'y']
+      });
+    });
+    registerCursorTracker({
+      input: expiryDateMask1,
+      delimiter: '/'
+    });
+  }
+
+  // CVV
+  if (cvvMask1) {
+    cvvMask1.addEventListener('input', event => {
+      const cleanValue = event.target.value.replace(/\D/g, '');
+      cvvMask1.value = formatNumeral(cleanValue, {
+        numeral: true,
+        numeralPositiveOnly: true
+      });
+    });
+  }
+  appModal.addEventListener('show.bs.modal', function (event) {
+    const wizardCreateApp = document.querySelector('#wizard-create-app');
+    if (typeof wizardCreateApp !== undefined && wizardCreateApp !== null) {
+      // Wizard next prev button
+      const wizardCreateAppNextList = [].slice.call(wizardCreateApp.querySelectorAll('.btn-next'));
+      const wizardCreateAppPrevList = [].slice.call(wizardCreateApp.querySelectorAll('.btn-prev'));
+      const wizardCreateAppBtnSubmit = wizardCreateApp.querySelector('.btn-submit');
+
+      const createAppStepper = new Stepper(wizardCreateApp, {
+        linear: false
+      });
+
+      if (wizardCreateAppNextList) {
+        wizardCreateAppNextList.forEach(wizardCreateAppNext => {
+          wizardCreateAppNext.addEventListener('click', event => {
+            createAppStepper.next();
+          });
+        });
+      }
+      if (wizardCreateAppPrevList) {
+        wizardCreateAppPrevList.forEach(wizardCreateAppPrev => {
+          wizardCreateAppPrev.addEventListener('click', event => {
+            createAppStepper.previous();
+          });
+        });
+      }
+
+      if (wizardCreateAppBtnSubmit) {
+        wizardCreateAppBtnSubmit.addEventListener('click', event => {
+          alert('Submitted..!!');
+        });
+      }
+    }
+  });
+});

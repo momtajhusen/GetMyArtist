@@ -16,22 +16,26 @@
                 <img src="{{ asset('storage/'.$sub->image) }}" alt="{{ $sub->name }}" style="max-width: 30px; border-radius: 5px;">
             @endif
         </td>
-        <td>{{ ucfirst($sub->status) }}</td>
+        <td> 
+          <span class="badge {{ $sub->status === 'inactive' ? 'bg-label-danger' : 'bg-label-info' }}">
+            {{ ucfirst($sub->status) }}
+          </span>
+        </td>
         <td>{{ $sub->description }}</td>
         <td>
             <div class="dropdown">
                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                    <i class="ti ti-dots-vertical"></i>
+                    <i class="ti tabler-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu">
                     <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal{{ $sub->id }}">
-                        <i class="ti ti-pencil me-1"></i> Edit
+                        <i class="ti tabler-pencil me-1"></i> Edit
                     </button>
                     <form action="{{ route('categories.destroy', $sub->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="dropdown-item text-danger">
-                            <i class="ti ti-trash me-1"></i> Delete
+                            <i class="ti tabler-trash me-1"></i> Delete
                         </button>
                     </form>
                 </div>

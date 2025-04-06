@@ -1,1 +1,532 @@
-"use strict";!function(){let e,r,t;t=(isDarkStyle?(e=config.colors_dark.textMuted,r=config.colors_dark.headingColor,config.colors_dark):(e=config.colors.textMuted,r=config.colors.headingColor,config.colors)).borderColor;var a={donut:{series1:"#209F59",series2:"#24B364",series3:config.colors.success,series4:"#53D28C",series5:"#7EDDA9",series6:"#A9E9C5"}},s=document.querySelector("#leadsReportChart"),a={chart:{height:170,width:150,parentHeightOffset:0,type:"donut"},labels:["36h","56h","16h","32h","56h","16h"],series:[23,35,10,20,35,23],colors:[a.donut.series1,a.donut.series2,a.donut.series3,a.donut.series4,a.donut.series5,a.donut.series6],stroke:{width:0},dataLabels:{enabled:!1,formatter:function(e,t){return parseInt(e)+"%"}},legend:{show:!1},tooltip:{theme:!1},grid:{padding:{top:0}},plotOptions:{pie:{donut:{size:"70%",labels:{show:!0,value:{fontSize:"1.125rem",fontFamily:"Public Sans",color:r,fontWeight:500,offsetY:-20,formatter:function(e){return parseInt(e)+"%"}},name:{offsetY:20,fontFamily:"Public Sans"},total:{show:!0,fontSize:".9375rem",label:"Total",color:e,formatter:function(e){return"231h"}}}}}}};null!==s&&new ApexCharts(s,a).render();const o=document.querySelector("#horizontalBarChart"),i={chart:{height:320,type:"bar",toolbar:{show:!1}},plotOptions:{bar:{horizontal:!0,barHeight:"70%",distributed:!0,startingShape:"rounded",borderRadius:7}},grid:{strokeDashArray:10,borderColor:t,xaxis:{lines:{show:!0}},yaxis:{lines:{show:!1}},padding:{top:-35,bottom:-12}},colors:[config.colors.primary,config.colors.info,config.colors.success,config.colors.secondary,config.colors.danger,config.colors.warning],fill:{opacity:[1,1,1,1,1,1]},dataLabels:{enabled:!0,style:{colors:["#fff"],fontWeight:400,fontSize:"13px",fontFamily:"Public Sans"},formatter:function(e,t){return i.labels[t.dataPointIndex]},offsetX:0,dropShadow:{enabled:!1}},labels:["UI Design","UX Design","Music","Animation","React","SEO"],series:[{data:[35,20,14,12,10,9]}],xaxis:{categories:["6","5","4","3","2","1"],axisBorder:{show:!1},axisTicks:{show:!1},labels:{style:{colors:e,fontSize:"13px",fontFamily:"Public Sans"},formatter:function(e){return e+"%"}}},yaxis:{max:35,labels:{style:{colors:[e],fontFamily:"Public Sans",fontSize:"13px"}}},tooltip:{enabled:!0,style:{fontSize:"12px"},onDatasetHover:{highlightDataSeries:!1},custom:function({series:e,seriesIndex:t,dataPointIndex:a}){return'<div class="px-3 py-2"><span>'+e[t][a]+"%</span></div>"}},legend:{show:!1}};null!==o&&new ApexCharts(o,i).render();var n,s=document.querySelectorAll(".chart-progress"),a=(s&&s.forEach(function(e){var t=config.colors[e.dataset.color],a=e.dataset.series,s=e.dataset.progress_variant,t=(t=t,a=a,{chart:{height:"true"==(s=s)?58:48,width:"true"==s?58:38,type:"radialBar"},plotOptions:{radialBar:{hollow:{size:"true"==s?"50%":"25%"},dataLabels:{show:"true"==s,value:{offsetY:-10,fontSize:"15px",fontWeight:500,fontFamily:"Public Sans",color:r}},track:{background:config.colors_label.secondary}}},stroke:{lineCap:"round"},colors:[t],grid:{padding:{top:"true"==s?-12:-15,bottom:"true"==s?-17:-15,left:"true"==s?-17:-5,right:-15}},series:[a],labels:"true"==s?[""]:["Progress"]});new ApexCharts(e,t).render()}),$(".datatables-academy-course")),l={angular:'<span class="badge bg-label-danger rounded p-1_5"><i class="ti ti-brand-angular ti-28px"></i></span>',figma:'<span class="badge bg-label-warning rounded p-1_5"><i class="ti ti-brand-figma ti-28px"></i></span>',react:'<span class="badge bg-label-info rounded p-1_5"><i class="ti ti-brand-react-native ti-28px"></i></span>',art:'<span class="badge bg-label-success rounded p-1_5"><i class="ti ti-color-swatch ti-28px"></i></span>',fundamentals:'<span class="badge bg-label-primary rounded p-1_5"><i class="ti ti-diamond ti-28px"></i></span>'};a.length&&(n=a.DataTable({ajax:assetsPath+"json/app-academy-dashboard.json",columns:[{data:""},{data:"id"},{data:"course name"},{data:"time"},{data:"progress"},{data:"status"}],columnDefs:[{className:"control",searchable:!1,orderable:!1,responsivePriority:2,targets:0,render:function(e,t,a,s){return""}},{targets:1,orderable:!1,searchable:!1,checkboxes:!0,checkboxes:{selectAllRender:'<input type="checkbox" class="form-check-input">'},render:function(){return'<input type="checkbox" class="dt-checkboxes form-check-input">'}},{targets:2,responsivePriority:2,render:function(e,t,a,s){var r=a.logo,o=a.course,i=a.user,n=a.image;return a=n?'<img src="'+assetsPath+"img/avatars/"+n+'" alt="Avatar" class="rounded-circle">':'<span class="avatar-initial rounded-circle bg-label-'+["success","danger","warning","info","dark","primary","secondary"][Math.floor(6*Math.random())]+'">'+(n=(((n=a.user.match(/\b\w/g)||[]).shift()||"")+(n.pop()||"")).toUpperCase())+"</span>",'<div class="d-flex align-items-center"><span class="me-4">'+l[r]+'</span><div><a class="text-heading text-truncate fw-medium mb-2 text-wrap" href="app-academy-course-details.html">'+o+'</a><div class="d-flex align-items-center mt-1"><div class="avatar-wrapper me-2"><div class="avatar avatar-xs">'+a+'</div></div><small class="text-nowrap text-heading">'+i+"</small></div></div></div>"}},{targets:3,responsivePriority:3,render:function(e,t,a,s){var e=moment.duration(e),r=Math.floor(e.asHours());return'<span class="fw-medium text-nowrap text-heading">'+(r+"h "+(Math.floor(e.asMinutes())-60*r)+"m")+"</span>"}},{targets:4,render:function(e,t,a,s){var r=a.status;return'<div class="d-flex align-items-center gap-3"><p class="fw-medium mb-0 text-heading">'+r+'</p><div class="progress w-100" style="height: 8px;"><div class="progress-bar" style="width: '+r+'" aria-valuenow="'+r+'" aria-valuemin="0" aria-valuemax="100"></div></div><small>'+a.number+"</small></div>"}},{targets:5,render:function(e,t,a,s){return'<div class="d-flex align-items-center justify-content-between"><div class="w-px-50 d-flex align-items-center"><i class="ti ti-users ti-lg me-2 text-primary"></i><span>'+a.user_number+'</span></div><div class="w-px-50 d-flex align-items-center"><i class="ti ti-book ti-lg me-2 text-info"></i><span>'+a.note+'</span></div><div class="w-px-50 d-flex align-items-center"><i class="ti ti-video ti-lg me-2 text-danger"></i><span>'+a.view+"</span></div></div>"}}],order:[[2,"desc"]],dom:'<"card-header py-sm-0"<"head-label text-center">f>t<"row mx-md-4 flex-column flex-md-row align-items-center"<"col-sm-6 col-12 text-center text-md-start pb-2 pb-xl-0 px-0"i><"col-sm-6 col-12 d-flex justify-content-center justify-content-md-end px-0"p>>',lengthMenu:[5],language:{sLengthMenu:"_MENU_",search:"",searchPlaceholder:"Search Course",paginate:{next:'<i class="ti ti-chevron-right ti-sm"></i>',previous:'<i class="ti ti-chevron-left ti-sm"></i>'}},responsive:{details:{display:$.fn.dataTable.Responsive.display.modal({header:function(e){return"Details of "+e.data().order}}),type:"column",renderer:function(e,t,a){a=$.map(a,function(e,t){return""!==e.title?'<tr data-dt-row="'+e.rowIndex+'" data-dt-column="'+e.columnIndex+'"><td>'+e.title+":</td> <td>"+e.data+"</td></tr>":""}).join("");return!!a&&$('<table class="table"/><tbody />').append(a)}}}}),$("div.head-label").html('<h5 class="card-title mb-0 text-nowrap">Course you are taking</h5>')),$(".datatables-orders tbody").on("click",".delete-record",function(){n.row($(this).parents("tr")).remove().draw()}),setTimeout(()=>{$(".dataTables_filter .form-control").removeClass("form-control-sm"),$(".dataTables_length .form-select").removeClass("form-select-sm")},300)}();
+/**
+ * Academy Dashboard charts and datatable
+ */
+
+'use strict';
+
+// Hour pie chart
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  let labelColor, headingColor, borderColor, fontFamily;
+  labelColor = config.colors.textMuted;
+  headingColor = config.colors.headingColor;
+  borderColor = config.colors.borderColor;
+  fontFamily = config.fontFamily;
+
+  // Donut Chart Colors
+  const chartColors = {
+    donut: {
+      series1: 'color-mix(in sRGB, ' + config.colors.success + ' 80%, ' + config.colors.black + ')',
+      series2: 'color-mix(in sRGB, ' + config.colors.success + ' 90%, ' + config.colors.black + ')',
+      series3: config.colors.success,
+      series4: 'color-mix(in sRGB, ' + config.colors.success + ' 80%, ' + config.colors.cardColor + ')',
+      series5: 'color-mix(in sRGB, ' + config.colors.success + ' 60%, ' + config.colors.cardColor + ')',
+      series6: 'color-mix(in sRGB, ' + config.colors.success + ' 40%, ' + config.colors.cardColor + ')'
+    }
+  };
+
+  const leadsReportChartEl = document.querySelector('#leadsReportChart'),
+    leadsReportChartConfig = {
+      chart: {
+        height: 170,
+        width: 150,
+        parentHeightOffset: 0,
+        type: 'donut'
+      },
+      labels: ['36h', '56h', '16h', '32h', '56h', '16h'],
+      series: [23, 35, 10, 20, 35, 23],
+      colors: [
+        chartColors.donut.series1,
+        chartColors.donut.series2,
+        chartColors.donut.series3,
+        chartColors.donut.series4,
+        chartColors.donut.series5,
+        chartColors.donut.series6
+      ],
+      stroke: {
+        width: 0
+      },
+      dataLabels: {
+        enabled: false,
+        formatter: function (val, opt) {
+          return parseInt(val) + '%';
+        }
+      },
+      legend: {
+        show: false
+      },
+      tooltip: {
+        theme: false
+      },
+      grid: {
+        padding: {
+          top: 0
+        }
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '70%',
+            labels: {
+              show: true,
+              value: {
+                fontSize: '1.125rem',
+                fontFamily: fontFamily,
+                color: headingColor,
+                fontWeight: 500,
+                offsetY: -20,
+                formatter: function (val) {
+                  return parseInt(val) + '%';
+                }
+              },
+              name: {
+                offsetY: 20,
+                fontFamily: fontFamily
+              },
+              total: {
+                show: true,
+                fontSize: '.9375rem',
+                label: 'Total',
+                color: labelColor,
+                formatter: function (w) {
+                  return '231h';
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+  if (typeof leadsReportChartEl !== undefined && leadsReportChartEl !== null) {
+    const leadsReportChart = new ApexCharts(leadsReportChartEl, leadsReportChartConfig);
+    leadsReportChart.render();
+  }
+
+  // datatbale bar chart
+
+  const horizontalBarChartEl = document.querySelector('#horizontalBarChart'),
+    horizontalBarChartConfig = {
+      chart: {
+        height: 300,
+        type: 'bar',
+        toolbar: {
+          show: false
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: '60%',
+          distributed: true,
+          startingShape: 'rounded',
+          borderRadiusApplication: 'end',
+          borderRadius: 7
+        }
+      },
+      grid: {
+        strokeDashArray: 10,
+        borderColor: borderColor,
+        xaxis: {
+          lines: {
+            show: true
+          }
+        },
+        yaxis: {
+          lines: {
+            show: false
+          }
+        },
+        padding: {
+          top: -35,
+          bottom: -12
+        }
+      },
+      colors: [
+        config.colors.primary,
+        config.colors.info,
+        config.colors.success,
+        config.colors.secondary,
+        config.colors.danger,
+        config.colors.warning
+      ],
+      fill: {
+        opacity: [1, 1, 1, 1, 1, 1]
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+          colors: [config.colors.white],
+          fontWeight: 400,
+          fontSize: '13px',
+          fontFamily: fontFamily
+        },
+        formatter: function (val, opts) {
+          return horizontalBarChartConfig.labels[opts.dataPointIndex];
+        },
+        offsetX: 0,
+        dropShadow: {
+          enabled: false
+        }
+      },
+      labels: ['UI Design', 'UX Design', 'Music', 'Animation', 'React', 'SEO'],
+      series: [
+        {
+          data: [35, 20, 14, 12, 10, 9]
+        }
+      ],
+
+      xaxis: {
+        categories: ['6', '5', '4', '3', '2', '1'],
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          style: {
+            colors: labelColor,
+            fontFamily: fontFamily,
+            fontSize: '13px'
+          },
+          formatter: function (val) {
+            return `${val}%`;
+          }
+        }
+      },
+      yaxis: {
+        max: 35,
+        labels: {
+          style: {
+            colors: [labelColor],
+            fontFamily: fontFamily,
+            fontSize: '13px'
+          }
+        }
+      },
+      tooltip: {
+        enabled: true,
+        style: {
+          fontSize: '12px'
+        },
+        onDatasetHover: {
+          highlightDataSeries: false
+        },
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+          return '<div class="px-3 py-2">' + '<span>' + series[seriesIndex][dataPointIndex] + '%</span>' + '</div>';
+        }
+      },
+      legend: {
+        show: false
+      }
+    };
+  if (typeof horizontalBarChartEl !== undefined && horizontalBarChartEl !== null) {
+    const horizontalBarChart = new ApexCharts(horizontalBarChartEl, horizontalBarChartConfig);
+    horizontalBarChart.render();
+  }
+
+  //radial Barchart
+
+  // Radial bar chart functions
+  function radialBarChart(color, value, show) {
+    const radialBarChartOpt = {
+      chart: {
+        height: show == 'true' ? 58 : 48,
+        width: show == 'true' ? 58 : 38,
+        type: 'radialBar'
+      },
+      plotOptions: {
+        radialBar: {
+          hollow: {
+            size: show == 'true' ? '50%' : '25%'
+          },
+          dataLabels: {
+            show: show == 'true' ? true : false,
+            value: {
+              offsetY: -10,
+              fontSize: '15px',
+              fontWeight: 500,
+              fontFamily: fontFamily,
+              color: headingColor
+            }
+          },
+          track: {
+            background: config.colors_label.secondary
+          }
+        }
+      },
+      stroke: {
+        lineCap: 'round'
+      },
+      colors: [color],
+      grid: {
+        padding: {
+          top: show == 'true' ? -12 : -15,
+          bottom: show == 'true' ? -17 : -15,
+          left: show == 'true' ? -17 : -5,
+          right: -15
+        }
+      },
+      series: [value],
+      labels: show == 'true' ? [''] : ['Progress']
+    };
+    return radialBarChartOpt;
+  }
+
+  const chartProgressList = document.querySelectorAll('.chart-progress');
+  if (chartProgressList) {
+    chartProgressList.forEach(function (chartProgressEl) {
+      const color = config.colors[chartProgressEl.dataset.color],
+        series = chartProgressEl.dataset.series;
+      const progress_variant = chartProgressEl.dataset.progress_variant;
+      const optionsBundle = radialBarChart(color, series, progress_variant);
+      const chart = new ApexCharts(chartProgressEl, optionsBundle);
+      chart.render();
+    });
+  }
+
+  // datatable
+
+  // Variable declaration for table
+  const dt_academy_course = document.querySelector('.datatables-academy-course'),
+    logoObj = {
+      angular:
+        '<span class="badge bg-label-danger rounded p-1_5"><i class="icon-base ti tabler-brand-angular icon-28px"></i></span>',
+      figma:
+        '<span class="badge bg-label-warning rounded p-1_5"><i class="icon-base ti tabler-brand-figma icon-28px"></i></span>',
+      react:
+        '<span class="badge bg-label-info rounded p-1_5"><i class="icon-base ti tabler-brand-react icon-28px"></i></span>',
+      art: '<span class="badge bg-label-success rounded p-1_5"><i class="icon-base ti tabler-color-swatch icon-28px"></i></span>',
+      fundamentals:
+        '<span class="badge bg-label-primary rounded p-1_5"><i class="icon-base ti tabler-diamond icon-28px"></i></span>'
+    };
+
+  if (dt_academy_course) {
+    let tableTitle = document.createElement('h5');
+    tableTitle.classList.add('card-title', 'mb-0', 'text-nowrap', 'text-md-start', 'text-center');
+    tableTitle.innerHTML = 'Course you are taking';
+    let dt_course = new DataTable(dt_academy_course, {
+      ajax: assetsPath + 'json/app-academy-dashboard.json',
+      columns: [
+        // columns according to JSON
+        { data: 'id' },
+        { data: 'id', orderable: false, render: DataTable.render.select() },
+        { data: 'course name' },
+        { data: 'time' },
+        { data: 'progress' },
+        { data: 'status' }
+      ],
+      columnDefs: [
+        {
+          // For Responsive
+          className: 'control',
+          searchable: false,
+          orderable: false,
+          responsivePriority: 2,
+          targets: 0,
+          render: function (data, type, full, meta) {
+            return '';
+          }
+        },
+        {
+          // For Checkboxes
+          targets: 1,
+          orderable: false,
+          searchable: false,
+          responsivePriority: 3,
+          checkboxes: true,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        },
+        {
+          targets: 2,
+          responsivePriority: 2,
+          render: (data, type, full) => {
+            const { logo, course, user, image } = full;
+
+            const output = image
+              ? `<img src="${assetsPath}img/avatars/${image}" alt="Avatar" class="rounded-circle">`
+              : (() => {
+                  // Generate initials and random state for badge
+                  const states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+                  const state = states[Math.floor(Math.random() * states.length)];
+                  const initials = (user.match(/\b\w/g) || []).reduce((acc, char) => acc + char.toUpperCase(), '');
+                  return `<span class="avatar-initial rounded-circle bg-label-${state}">${initials}</span>`;
+                })();
+
+            // Create full row output
+            return `
+                  <div class="d-flex align-items-center">
+                      <span class="me-4">${logoObj[logo]}</span>
+                      <div>
+                          <a class="text-heading text-truncate fw-medium mb-2 text-wrap" href="app-academy-course-details.html">
+                              ${course}
+                          </a>
+                          <div class="d-flex align-items-center mt-1">
+                              <div class="avatar-wrapper me-2">
+                                  <div class="avatar avatar-xs">
+                                      ${output}
+                                  </div>
+                              </div>
+                              <small class="text-nowrap text-heading">${user}</small>
+                          </div>
+                      </div>
+                  </div>
+              `;
+          }
+        },
+        {
+          targets: 3,
+          responsivePriority: 3,
+          render: data => {
+            const duration = moment.duration(data);
+            const hours = Math.floor(duration.asHours());
+            const minutes = Math.floor(duration.asMinutes()) - hours * 60;
+            const formattedTime = `${hours}h ${minutes}m`;
+
+            return `<span class="fw-medium text-nowrap text-heading">${formattedTime}</span>`;
+          }
+        },
+        {
+          targets: 4,
+          render: (data, type, full) => {
+            const { status: statusNumber, number: averageNumber } = full;
+
+            return `
+                  <div class="d-flex align-items-center gap-3">
+                      <p class="fw-medium mb-0 text-heading">${statusNumber}</p>
+                      <div class="progress w-100" style="height: 8px;">
+                          <div
+                              class="progress-bar"
+                              style="width: ${statusNumber}"
+                              aria-valuenow="${statusNumber}"
+                              aria-valuemin="0"
+                              aria-valuemax="100">
+                          </div>
+                      </div>
+                      <small>${averageNumber}</small>
+                  </div>
+              `;
+          }
+        },
+        {
+          targets: 5,
+          render: (data, type, full) => {
+            const { user_number: userNumber, note, view } = full;
+
+            return `
+                  <div class="d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                          <i class="icon-base ti tabler-users icon-lg me-1_5 text-primary"></i>
+                          <span>${userNumber}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                          <i class="icon-base ti tabler-book icon-lg me-1_5 text-info"></i>
+                          <span>${note}</span>
+                      </div>
+                      <div class="d-flex align-items-center">
+                          <i class="icon-base ti tabler-video icon-lg me-1_5 text-danger"></i>
+                          <span>${view}</span>
+                      </div>
+                  </div>
+              `;
+          }
+        }
+      ],
+      select: {
+        style: 'multi',
+        selector: 'td:nth-child(2)'
+      },
+      order: [[2, 'desc']],
+      layout: {
+        topStart: {
+          rowClass: 'row card-header border-bottom mx-0 px-3 py-0',
+          features: [tableTitle]
+        },
+        topEnd: {
+          search: {
+            placeholder: 'Search Course',
+            text: '_INPUT_'
+          }
+        },
+        bottomStart: {
+          rowClass: 'row mx-3 justify-content-between',
+          features: ['info']
+        },
+        bottomEnd: 'paging'
+      },
+      lengthMenu: [5],
+      language: {
+        paginate: {
+          next: '<i class="icon-base ti tabler-chevron-right scaleX-n1-rtl icon-18px"></i>',
+          previous: '<i class="icon-base ti tabler-chevron-left scaleX-n1-rtl icon-18px"></i>',
+          first: '<i class="icon-base ti tabler-chevrons-left scaleX-n1-rtl icon-18px"></i>',
+          last: '<i class="icon-base ti tabler-chevrons-right scaleX-n1-rtl icon-18px"></i>'
+        }
+      },
+      // For responsive popup
+      responsive: {
+        details: {
+          display: DataTable.Responsive.display.modal({
+            header: function (row) {
+              const data = row.data();
+              return 'Details of ' + data['order'];
+            }
+          }),
+          type: 'column',
+          renderer: function (api, rowIdx, columns) {
+            const data = columns
+              .map(function (col) {
+                return col.title !== '' // Do not show row in modal popup if title is blank (for check box)
+                  ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+                      <td>${col.title}:</td>
+                      <td>${col.data}</td>
+                    </tr>`
+                  : '';
+              })
+              .join('');
+
+            if (data) {
+              const div = document.createElement('div');
+              div.classList.add('table-responsive');
+              const table = document.createElement('table');
+              div.appendChild(table);
+              table.classList.add('table');
+              table.classList.add('datatables-basic');
+              const tbody = document.createElement('tbody');
+              tbody.innerHTML = data;
+              table.appendChild(tbody);
+              return div;
+            }
+            return false;
+          }
+        }
+      }
+    });
+  }
+
+  // Filter form control to default size
+  // ? setTimeout used for data-table initialization
+  setTimeout(() => {
+    const elementsToModify = [
+      { selector: '.dt-search .form-control', classToRemove: 'form-control-sm' },
+      { selector: '.dt-length .form-select', classToRemove: 'form-select-sm' },
+      { selector: '.dt-layout-table', classToRemove: 'row mt-2' },
+      { selector: '.dt-layout-full', classToRemove: 'col-md col-12', classToAdd: 'table-responsive' }
+    ];
+
+    // Delete record
+    elementsToModify.forEach(({ selector, classToRemove, classToAdd }) => {
+      document.querySelectorAll(selector).forEach(element => {
+        classToRemove.split(' ').forEach(className => element.classList.remove(className));
+        if (classToAdd) {
+          element.classList.add(classToAdd);
+        }
+      });
+    });
+  }, 100);
+});

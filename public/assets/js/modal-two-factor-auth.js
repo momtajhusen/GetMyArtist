@@ -1,1 +1,28 @@
-"use strict";document.addEventListener("DOMContentLoaded",function(e){var n;(n=document.querySelectorAll("#twoFactorAuthInputSms"))&&n.forEach(function(e){new Cleave(e,{phone:!0,phoneRegionCode:"US"})})});
+/**
+ * Two Factor Authentication
+ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  (function () {
+    const phoneMaskList = document.querySelectorAll('#twoFactorAuthInputSms');
+
+    // Phone Number
+    if (phoneMaskList) {
+      phoneMaskList.forEach(function (phoneMask) {
+        phoneMask.addEventListener('input', event => {
+          const cleanValue = event.target.value.replace(/\D/g, '');
+          phoneMask.value = formatGeneral(cleanValue, {
+            blocks: [3, 3, 4],
+            delimiters: [' ', ' ']
+          });
+        });
+        registerCursorTracker({
+          input: phoneMask,
+          delimiter: ' '
+        });
+      });
+    }
+  })();
+});

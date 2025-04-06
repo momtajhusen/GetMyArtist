@@ -1,1 +1,198 @@
-"use strict";!function(){const e=document.querySelector(".toast-ex"),o=document.querySelector(".toast-placement-ex"),t=document.querySelector("#showToastAnimation"),s=document.querySelector("#showToastPlacement");let a,n,i,l,r;function c(t){t&&null!==t._element&&(o&&(o.classList.remove(a),o.querySelector(".ti").classList.remove(a),DOMTokenList.prototype.remove.apply(o.classList,i)),e&&(e.classList.remove(a,n),e.querySelector(".ti").classList.remove(a)),t.dispose())}t&&(t.onclick=function(){l&&c(l),a=document.querySelector("#selectType").value,n=document.querySelector("#selectAnimation").value,e.classList.add(n),e.querySelector(".ti").classList.add(a),(l=new bootstrap.Toast(e)).show()}),s&&(s.onclick=function(){r&&c(r),a=document.querySelector("#selectTypeOpt").value,i=document.querySelector("#selectPlacement").value.split(" "),o.querySelector(".ti").classList.add(a),DOMTokenList.prototype.add.apply(o.classList,i),(r=new bootstrap.Toast(o)).show()})}(),$(function(){var f,k=-1,y=0;$("#closeButton").on("click",function(){$(this).is(":checked")?$("#addBehaviorOnToastCloseClick").prop("disabled",!1):($("#addBehaviorOnToastCloseClick").prop("disabled",!0),$("#addBehaviorOnToastCloseClick").prop("checked",!1))}),$("#showtoast").on("click",function(){var t=$("#toastTypeGroup input:radio:checked").val(),e="rtl"===$("html").attr("dir"),o=$("#message").val(),s=$("#title").val()||"",a=$("#showDuration"),n=$("#hideDuration"),i=$("#timeOut"),l=$("#extendedTimeOut"),r=$("#showEasing"),c=$("#hideEasing"),p=$("#showMethod"),u=$("#hideMethod"),d=y++,h=$("#addClear").prop("checked"),v=void 0===toastr.options.positionClass?"toast-top-right":toastr.options.positionClass,o=(toastr.options={maxOpened:1,autoDismiss:!0,closeButton:$("#closeButton").prop("checked"),debug:$("#debugInfo").prop("checked"),newestOnTop:$("#newestOnTop").prop("checked"),progressBar:$("#progressBar").prop("checked"),positionClass:$("#positionGroup input:radio:checked").val()||"toast-top-right",preventDuplicates:$("#preventDuplicates").prop("checked"),onclick:null,rtl:e},v!=toastr.options.positionClass&&(toastr.options.hideDuration=0,toastr.clear()),$("#addBehaviorOnToastClick").prop("checked")&&(toastr.options.onclick=function(){alert("You can perform some custom action after a toast goes away")}),$("#addBehaviorOnToastCloseClick").prop("checked")&&(toastr.options.onCloseClick=function(){alert("You can perform some custom action when the close button is clicked")}),a.val().length&&(toastr.options.showDuration=parseInt(a.val())),n.val().length&&(toastr.options.hideDuration=parseInt(n.val())),i.val().length&&(toastr.options.timeOut=h?0:parseInt(i.val())),l.val().length&&(toastr.options.extendedTimeOut=h?0:parseInt(l.val())),r.val().length&&(toastr.options.showEasing=r.val()),c.val().length&&(toastr.options.hideEasing=c.val()),p.val().length&&(toastr.options.showMethod=p.val()),u.val().length&&(toastr.options.hideMethod=u.val()),h&&(e=(e=o)||"Clear itself?",o=e+='<br /><br /><button type="button" class="btn btn-secondary clear waves-effect waves-light">Yes</button>',toastr.options.tapToDismiss=!1),o||(v=["Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",'<div class="mb-3"><input class="input-small form-control" value="Textbox"/>&nbsp;<a href="http://johnpapa.net" target="_blank">This is a hyperlink</a></div><div class="d-flex"><button type="button" id="okBtn" class="btn btn-primary btn-sm me-2 waves-effect waves-light">Close me</button><button type="button" id="surpriseBtn" class="btn btn-sm btn-secondary waves-effect waves-light">Surprise me</button></div>',"Live the Life of Your Dreams","Believe in Your Self!","Be mindful. Be grateful. Be positive.","Accept yourself, love yourself!"])[k=++k===v.length?0:k]),m=toastr[t](o,s);void 0!==(f=m)&&(m.find("#okBtn").length&&m.delegate("#okBtn","click",function(){alert("you clicked me. i was toast #"+d+". goodbye!"),m.remove()}),m.find("#surpriseBtn").length&&m.delegate("#surpriseBtn","click",function(){alert("Surprise! you clicked me. i was toast #"+d+". You could perform an action here.")}),m.find(".clear").length)&&m.delegate(".clear","click",function(){toastr.clear(m,{force:!0})})}),$("#clearlasttoast").on("click",function(){toastr.clear(f)}),$("#cleartoasts").on("click",function(){toastr.clear()})});
+/**
+ * UI Toasts
+ */
+
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  // Bootstrap toasts example
+  // --------------------------------------------------------------------
+  const toastAnimationExample = document.querySelector('.toast-ex'),
+    toastPlacementExample = document.querySelector('.toast-placement-ex'),
+    toastAnimationBtn = document.querySelector('#showToastAnimation'),
+    toastPlacementBtn = document.querySelector('#showToastPlacement');
+  let selectedType, selectedAnimation, selectedPlacement, toast, toastAnimation, toastPlacement;
+
+  // Animation Button click
+  if (toastAnimationBtn) {
+    toastAnimationBtn.onclick = function () {
+      if (toastAnimation) {
+        toastDispose(toastAnimation);
+      }
+      selectedType = document.querySelector('#selectType').value;
+      selectedAnimation = document.querySelector('#selectAnimation').value;
+      toastAnimationExample.classList.add(selectedAnimation);
+      toastAnimationExample.querySelector('.ti').classList.add(selectedType);
+      toastAnimation = new bootstrap.Toast(toastAnimationExample);
+      toastAnimation.show();
+    };
+  }
+
+  // Dispose toast when open another
+  function toastDispose(toast) {
+    if (toast && toast._element !== null) {
+      if (toastPlacementExample) {
+        toastPlacementExample.classList.remove(selectedType);
+        toastPlacementExample.querySelector('.ti').classList.remove(selectedType);
+        DOMTokenList.prototype.remove.apply(toastPlacementExample.classList, selectedPlacement);
+      }
+      if (toastAnimationExample) {
+        toastAnimationExample.classList.remove(selectedType, selectedAnimation);
+        toastAnimationExample.querySelector('.ti').classList.remove(selectedType);
+      }
+      toast.dispose();
+    }
+  }
+  // Placement Button click
+  if (toastPlacementBtn) {
+    toastPlacementBtn.onclick = function () {
+      if (toastPlacement) {
+        toastDispose(toastPlacement);
+      }
+      selectedType = document.querySelector('#selectTypeOpt').value;
+      selectedPlacement = document.querySelector('#selectPlacement').value.split(' ');
+
+      toastPlacementExample.querySelector('.ti').classList.add(selectedType);
+      DOMTokenList.prototype.add.apply(toastPlacementExample.classList, selectedPlacement);
+      toastPlacement = new bootstrap.Toast(toastPlacementExample);
+      toastPlacement.show();
+    };
+  }
+
+  //notyf (js)
+  // --------------------------------------------------------------------
+
+  // Initialize message index
+  let i = -1;
+
+  // Function to cycle through messages
+  const getMessage = function () {
+    const msgs = [
+      "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
+      '<div class="mb-3"><input class="input-small form-control" value="Textbox"/>&nbsp;<a href="http://example.com" target="_blank" class="text-white">This is a hyperlink</a></div><div class="d-flex"><button type="button" id="okBtn" class="btn btn-primary btn-sm me-2">Close me</button><button type="button" id="surpriseBtn" class="btn btn-sm btn-secondary">Surprise me</button></div>',
+      'Live the Life of Your Dreams',
+      'Believe in Yourself!',
+      'Be mindful. Be grateful. Be positive.',
+      'Accept yourself, love yourself!'
+    ];
+    i = (i + 1) % msgs.length;
+    return msgs[i];
+  };
+
+  // Custom Notyf class to allow HTML content in messages
+  class CustomNotyf extends Notyf {
+    _renderNotification(options) {
+      const notification = super._renderNotification(options);
+
+      // Replace textContent with innerHTML to render HTML content
+      if (options.message) {
+        notification.message.innerHTML = options.message;
+      }
+
+      return notification;
+    }
+  }
+
+  // Initialize CustomNotyf instance with default behaviors
+  const notyf = new CustomNotyf({
+    duration: 3000,
+    ripple: true,
+    dismissible: false,
+    position: { x: 'right', y: 'top' },
+    types: [
+      {
+        type: 'info',
+        background: config.colors.info,
+        className: 'notyf__info',
+        icon: {
+          className: 'icon-base ti tabler-info-circle-filled icon-md text-white',
+          tagName: 'i'
+        }
+      },
+      {
+        type: 'warning',
+        background: config.colors.warning,
+        className: 'notyf__warning',
+        icon: {
+          className: 'icon-base ti tabler-alert-triangle-filled icon-md text-white',
+          tagName: 'i'
+        }
+      },
+      {
+        type: 'success',
+        background: config.colors.success,
+        className: 'notyf__success',
+        icon: {
+          className: 'icon-base ti tabler-circle-check-filled icon-md text-white',
+          tagName: 'i'
+        }
+      },
+      {
+        type: 'error',
+        background: config.colors.danger,
+        className: 'notyf__error',
+        icon: {
+          className: 'icon-base ti tabler-xbox-x-filled icon-md text-white',
+          tagName: 'i'
+        }
+      }
+    ]
+  });
+
+  // Event listener for Show Notification button
+  document.getElementById('showNotification').addEventListener('click', () => {
+    const message = document.getElementById('message').value || getMessage(); // Use getMessage() to get the next message
+    const dismissible = document.getElementById('dismissible').checked;
+    const ripple = document.getElementById('ripple').checked;
+    const durationInput = document.getElementById('duration').value;
+    const duration = durationInput ? parseInt(durationInput) : 3000;
+
+    // Get selected position
+    const positionYValue = document.querySelector('input[name="positiony"]:checked').value;
+    const positionXValue = document.querySelector('input[name="positionx"]:checked').value;
+    const position = { x: positionXValue, y: positionYValue };
+
+    // Get selected notification type
+    const type = document.querySelector('input[name="notificationType"]:checked').value;
+
+    // Build the notification options
+    const notificationOptions = {
+      type: type,
+      message: message,
+      duration: duration,
+      dismissible: dismissible,
+      ripple: ripple,
+      position: position
+    };
+
+    // Display notification and get the reference
+    attachNotificationEventListeners();
+    notyf.open(notificationOptions);
+  });
+
+  // Event listener for Clear Notifications button
+  document.getElementById('clearNotifications').addEventListener('click', () => {
+    notyf.dismissAll();
+  });
+
+  // Function to attach event listeners to elements inside the notification
+  function attachNotificationEventListeners() {
+    // Wait for the DOM to update
+    setTimeout(() => {
+      const okBtn = document.getElementById('okBtn');
+      const surpriseBtn = document.getElementById('surpriseBtn');
+
+      if (okBtn) {
+        okBtn.addEventListener('click', () => {
+          notyf.dismissAll(); // Close all notifications
+        });
+      }
+
+      if (surpriseBtn) {
+        surpriseBtn.addEventListener('click', () => {
+          notyf.success('Surprise! This is a new message.');
+        });
+      }
+    }, 100);
+  }
+});
